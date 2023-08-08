@@ -22,7 +22,6 @@ const Saved = () => {
         btn.classList.remove(`active`);
       }
     });
-    console.log(e.currentTarget);
   };
 
   return (
