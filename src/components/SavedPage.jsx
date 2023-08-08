@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Card from '../common/Card';
+import ListBackgroundImg from '../assets/images/list-bg.png';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
@@ -56,7 +57,7 @@ export default SavedPage;
 const Container = styled.div`
   width: 80%;
   display: flex;
-  gap: 150px;
+  gap: 80px;
   margin: 0 auto;
 `;
 
@@ -66,7 +67,7 @@ const LeftContainer = styled.div`
 
 const RightContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
   gap: 30px;
   width: 100%;
   height: 100%;
@@ -79,9 +80,9 @@ const ListBox = styled.div`
   box-sizing: border-box;
   height: 200px;
   max-height: 200px;
-  padding: 5px 20px 20px;
+  padding: 5px 30px 20px;
   border-radius: 10px;
-  background-color: white;
+  background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
 
   & > p {

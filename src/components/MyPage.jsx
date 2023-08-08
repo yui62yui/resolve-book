@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../common/Card';
+import ListBackgroundImg from '../assets/images/list-bg.png';
 
 const MyPage = () => {
   const [data, setData] = useState([]);
@@ -51,7 +52,7 @@ const Container = styled.div`
   width: 80%;
   min-width: 1100px;
   display: flex;
-  gap: 150px;
+  gap: 80px;
   flex-shrink: 0;
   margin: 0 auto;
 `;
@@ -62,7 +63,7 @@ const LeftContainer = styled.div`
 
 const RightContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
   gap: 30px;
   width: 50%;
   height: 100%;
@@ -72,9 +73,9 @@ const ListBox = styled.div`
   box-sizing: border-box;
   height: 200px;
   max-height: 200px;
-  padding: 5px 20px 10px;
+  padding: 5px 30px 10px;
   border-radius: 10px;
-  background-color: white;
+  background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
 
   & > p {
