@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../common/Card';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 
 const MyPage = () => {
@@ -18,6 +20,10 @@ const MyPage = () => {
 
   const showPostHandler = async (post) => {
     await setSelectedData(post);
+  };
+
+  const deletePostHandler = (post) => {
+    alert('정말 삭제하시겠습니까?');
   };
 
   return (
@@ -37,6 +43,20 @@ const MyPage = () => {
                 }}
               >
                 <p>{post.userConcern}</p>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: '#868686',
+                    transition: '0.3s',
+                    ':hover': { backgroundColor: '#666' }
+                  }}
+                  onClick={() => {
+                    deletePostHandler(post);
+                  }}
+                >
+                  <DeleteIcon sx={{ fontSize: '18px', marginRight: '5px' }} />
+                  <span>삭제</span>
+                </Button>
               </ListBox>
             );
           }
@@ -75,7 +95,7 @@ const ListBox = styled.div`
   box-sizing: border-box;
   height: 200px;
   max-height: 200px;
-  padding: 5px 30px 10px;
+  padding: 5px 30px 20px;
   border-radius: 10px;
   background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
@@ -84,7 +104,7 @@ const ListBox = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 
     font-size: 18px;
@@ -93,5 +113,11 @@ const ListBox = styled.div`
     line-height: 1.4;
 
     color: #333;
+  }
+
+  & > button {
+    margin: 0 auto;
+    width: 100px;
+    height: 40px;
   }
 `;
