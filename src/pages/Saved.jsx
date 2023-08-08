@@ -53,7 +53,7 @@ const Saved = () => {
 
 export default Saved;
 
-const Container = styled.body`
+const Container = styled.div`
   box-sizing: border-box;
   width: 100%;
   text-align: center;
