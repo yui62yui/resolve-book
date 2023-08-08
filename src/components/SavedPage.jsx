@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Card from '../common/Card';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
@@ -19,7 +20,9 @@ const SavedPage = () => {
 
   return (
     <Container>
-      <LeftContainer></LeftContainer>
+      <LeftContainer>
+        <Card />
+      </LeftContainer>
       <RightContainer>
         {data.map((post) => {
           if (post.saved === true) {

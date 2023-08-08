@@ -1,8 +1,7 @@
-import { Card } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import CardContainer from '../common/Card';
+import Card from '../common/Card';
 
 const MyPage = () => {
   const [data, setData] = useState([]);
@@ -25,7 +24,7 @@ const MyPage = () => {
     <Container>
       <LeftContainer>
         {/* 이쪽에 선택된 데이터를 기반으로 정보를 보여 주면 됨 */}
-        <CardContainer />
+        <Card />
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {
