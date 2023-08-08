@@ -52,10 +52,7 @@ export default Saved;
 
 const Container = styled.body`
   box-sizing: border-box;
-
   width: 100%;
-  margin: 0 auto;
-
   text-align: center;
 
   color: #999;
