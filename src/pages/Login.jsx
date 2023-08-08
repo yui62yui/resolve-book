@@ -12,8 +12,6 @@ import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { userAtom } from '../store';
-import { useAtom } from 'jotai';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,10 +38,6 @@ const Login = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  // Atom을 읽고 업데이트하는 훅 : useAtom()
-  // setUser로 유저의 로그인 정보를 업데이트한다(user 생략).
-  const [, setUser] = useAtom(userAtom);
-
   // Input 필드 상태 관리
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -62,13 +56,10 @@ const Login = () => {
       }
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
-      setUser(userCredential.user.email); // 유저의 로그인 정보 업데이트
       alert('로그인에 성공하셨습니다.');
 
       navigate('/');
     } catch (error) {
-      console.log(error);
-      console.log(error.code); // undefined가 나오면 "로그인에 실패하셨습니다." .... 왜?
       alert(getErrorMessage(error.code));
     }
   };
