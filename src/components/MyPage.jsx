@@ -17,7 +17,6 @@ const MyPage = () => {
 
   const showPostHandler = async (post) => {
     await setSelectedData(post);
-    console.log(selectedData);
   };
 
   return (
@@ -64,6 +63,7 @@ const RightContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   width: 100%;
+  height: 100%;
 `;
 
 const ListBox = styled.div`
@@ -86,6 +86,7 @@ const ListBox = styled.div`
     font-weight: 400;
     letter-spacing: -0.5px;
     line-height: 1.4;
+    word-break: keep-all;
 
     color: #333;
   }

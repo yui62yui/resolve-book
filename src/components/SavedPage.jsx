@@ -69,6 +69,7 @@ const RightContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   width: 100%;
+  height: 100%;
 `;
 
 const ListBox = styled.div`
