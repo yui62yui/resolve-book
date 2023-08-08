@@ -24,7 +24,7 @@ const MyPage = () => {
     <Container>
       <LeftContainer>
         {/* 이쪽에 선택된 데이터를 기반으로 정보를 보여 주면 됨 */}
-        <Card />
+        <Card selectedData={selectedData} />
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {
