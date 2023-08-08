@@ -9,6 +9,8 @@ const Saved = () => {
 
   useEffect(() => {
     setMyButton(true);
+    const btn = document.querySelector('.myButton');
+    btn.classList.add(`active`);
   }, []);
 
   const buttonActiveHandler = (e) => {
@@ -27,6 +29,7 @@ const Saved = () => {
     <Container>
       <Stack direction="row" spacing={2} sx={{ display: 'block', margin: '30px auto 100px' }}>
         <PageButton
+          className="myButton"
           onClick={(event) => {
             setMyButton(true);
             buttonActiveHandler(event);
