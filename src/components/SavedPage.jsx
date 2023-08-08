@@ -66,7 +66,7 @@ const LeftContainer = styled.div`
 
 const RightContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
   gap: 30px;
   width: 100%;
   height: 100%;

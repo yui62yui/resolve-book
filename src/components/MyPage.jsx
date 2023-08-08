@@ -49,20 +49,22 @@ export default MyPage;
 
 const Container = styled.div`
   width: 80%;
+  min-width: 1100px;
   display: flex;
   gap: 150px;
+  flex-shrink: 0;
   margin: 0 auto;
 `;
 
 const LeftContainer = styled.div`
-  width: 100%;
+  width: 50%;
 `;
 
 const RightContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
   gap: 30px;
-  width: 100%;
+  width: 50%;
   height: 100%;
 `;
 
