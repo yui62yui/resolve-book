@@ -10,8 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
+import { useAtom } from 'jotai';
+import { userAtom } from '../store';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  // Atom을 읽고 업데이트하는 훅 : useAtom()
+  // setUser로 유저의 로그인 정보를 업데이트한다(user 생략).
+  const [, setUser] = useAtom(userAtom);
 
   // Input 필드 상태 관리
   const [email, setEmail] = useState('');
@@ -54,13 +61,16 @@ const SignUp = () => {
         return;
       }
       if (password === confirmPassword) {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        setUser(userCredential.user.email); // 유저의 로그인 정보 업데이트
         alert('회원가입에 성공하셨습니다.');
-        // Navigate('/');
+
+        navigate('/');
       } else {
         alert(getErrorMessage('auth/wrong-password'));
       }
     } catch (error) {
+      console.log(error);
       console.log(error.code);
       alert(getErrorMessage(error.code));
     }
@@ -142,7 +152,7 @@ const SignUp = () => {
                 name="confirm-password"
                 label="비밀번호 확인"
                 type="password"
-                id="password"
+                id="confirm-password"
                 value={confirmPassword}
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);

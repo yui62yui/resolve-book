@@ -6,9 +6,26 @@ import IconButton from '@mui/material/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { userAtom } from '../store';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebaseConfig';
 
 const Header = () => {
   const navigate = useNavigate();
+  // Atom을 읽고 상태 업데이트
+  const [user, setUser] = useAtom(userAtom);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Firebase에서 로그아웃 처리
+      setUser(null); // Jotai의 userAtom을 null로 업데이트하여 로그아웃 상태로 변경
+      alert('로그아웃 되었습니다.');
+    } catch (error) {
+      console.error('로그아웃 중 오류 발생:', error);
+    }
+  };
+
   const [setMobileMoreAnchorEl] = React.useState(null);
 
   const handleMobileMenuOpen = (event) => {
@@ -24,24 +41,33 @@ const Header = () => {
           <Button style={{ color: 'white' }}>커뮤니티</Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              onClick={() => {
-                navigate('/login');
-              }}
-              style={{ color: 'white' }}
-            >
-              로그인
-            </Button>
-            <Button
-              onClick={() => {
-                navigate('/signup');
-              }}
-              style={{ color: 'white' }}
-            >
-              회원가입
-            </Button>
-            <Button style={{ color: 'white' }}>내 보관함</Button>
-            <Button style={{ color: 'white' }}>로그아웃</Button>
+            {!user ? (
+              <>
+                <Button
+                  onClick={() => {
+                    navigate('/login');
+                  }}
+                  style={{ color: 'white' }}
+                >
+                  로그인
+                </Button>
+                <Button
+                  onClick={() => {
+                    navigate('/signup');
+                  }}
+                  style={{ color: 'white' }}
+                >
+                  회원가입
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button style={{ color: 'white' }}>내 보관함</Button>
+                <Button onClick={handleLogout} style={{ color: 'white' }}>
+                  로그아웃
+                </Button>
+              </>
+            )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton

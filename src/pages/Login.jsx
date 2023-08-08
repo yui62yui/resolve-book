@@ -9,9 +9,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { userAtom } from '../store';
+import { useAtom } from 'jotai';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,8 +35,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Login 컴포넌트  ----------------------------------------------------------------------
 const Login = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  // Atom을 읽고 업데이트하는 훅 : useAtom()
+  // setUser로 유저의 로그인 정보를 업데이트한다(user 생략).
+  const [, setUser] = useAtom(userAtom);
 
   // Input 필드 상태 관리
   const [email, setEmail] = useState('');
@@ -54,10 +62,13 @@ const Login = () => {
       }
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
+      setUser(userCredential.user.email); // 유저의 로그인 정보 업데이트
       alert('로그인에 성공하셨습니다.');
-      // Navigate('/'); // 여기에서도 회원가입과 같은 문제
+
+      navigate('/');
     } catch (error) {
-      console.log(error.code);
+      console.log(error);
+      console.log(error.code); // undefined가 나오면 "로그인에 실패하셨습니다." .... 왜?
       alert(getErrorMessage(error.code));
     }
   };
