@@ -56,6 +56,7 @@ export default SavedPage;
 
 const Container = styled.div`
   width: 80%;
+  min-width: 1000px;
   display: flex;
   gap: 80px;
   margin: 0 auto;

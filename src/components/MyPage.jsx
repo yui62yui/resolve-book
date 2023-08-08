@@ -50,26 +50,28 @@ export default MyPage;
 
 const Container = styled.div`
   width: 80%;
-  min-width: 1100px;
+  min-width: 1000px;
   display: flex;
   gap: 80px;
-  flex-shrink: 0;
   margin: 0 auto;
 `;
 
 const LeftContainer = styled.div`
-  width: 50%;
+  width: 100%;
 `;
 
 const RightContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
   gap: 30px;
-  width: 50%;
+  width: 100%;
   height: 100%;
 `;
 
 const ListBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-sizing: border-box;
   height: 200px;
   max-height: 200px;
@@ -89,7 +91,6 @@ const ListBox = styled.div`
     font-weight: 400;
     letter-spacing: -0.5px;
     line-height: 1.4;
-    word-break: keep-all;
 
     color: #333;
   }
