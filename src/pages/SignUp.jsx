@@ -9,6 +9,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Navigate } from 'react-router-dom';
+import { auth } from '../firebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,9 +36,60 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
   const classes = useStyles();
 
+  // Input 필드 상태 관리
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  // 회원가입
+  const onSubmitSignUpHandler = async (e) => {
+    e.preventDefault();
+    try {
+      if (!email) {
+        alert('이메일을 입력해주세요.');
+        return;
+      }
+      if (!password) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+      if (password === confirmPassword) {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert('회원가입에 성공하셨습니다.');
+        // Navigate('/');
+      } else {
+        alert(getErrorMessage('auth/wrong-password'));
+      }
+    } catch (error) {
+      console.log(error.code);
+      alert(getErrorMessage(error.code));
+    }
+  };
+
+  // 에러 코드에 따른 유효성 검사 한 번에 관리
+  const getErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/user-not-found':
+      case 'auth/missing-email':
+        return '잘못된 이메일입니다.';
+      case 'auth/missing-password':
+        return '잘못된 비밀번호입니다.';
+      case 'auth/wrong-password':
+        return '비밀번호가 일치하지 않습니다.';
+      case 'auth/email-already-in-use':
+        return '이미 사용 중인 이메일입니다.';
+      case 'auth/weak-password':
+        return '비밀번호는 6글자 이상이어야 합니다.';
+      case 'auth/network-request-failed':
+        return '네트워크 연결에 실패 하였습니다.';
+      case 'auth/invalid-email':
+        return '잘못된 이메일 형식입니다.';
+      case 'auth/internal-error':
+        return '잘못된 요청입니다.';
+      default:
+        return '회원가입에 실패하셨습니다.';
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -47,7 +101,7 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           회원가입{' '}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={onSubmitSignUpHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -59,6 +113,10 @@ const SignUp = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -70,6 +128,10 @@ const SignUp = () => {
                 label="비밀번호"
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -81,6 +143,10 @@ const SignUp = () => {
                 label="비밀번호 확인"
                 type="password"
                 id="password"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
               />
             </Grid>
             <Grid item xs={12}></Grid>

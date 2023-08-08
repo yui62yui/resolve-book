@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,6 +9,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { Navigate } from 'react-router-dom';
+import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,6 +36,53 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
   const classes = useStyles();
 
+  // Input 필드 상태 관리
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // 로그인
+  const onSubmitSignInHandler = async (e) => {
+    e.preventDefault();
+    try {
+      if (!email) {
+        alert('이메일을 입력해주세요.');
+        return;
+      }
+      if (!password) {
+        alert('비밀번호를 입력해주세요.');
+        return;
+      }
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
+      alert('로그인에 성공하셨습니다.');
+      // Navigate('/'); // 여기에서도 회원가입과 같은 문제
+    } catch (error) {
+      console.log(error.code);
+      alert(getErrorMessage(error.code));
+    }
+  };
+
+  // 에러 코드에 따른 유효성 검사 한 번에 관리
+  const getErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/user-not-found':
+      case 'auth/missing-email':
+        return '잘못된 이메일입니다.';
+      case 'auth/missing-password':
+        return '잘못된 비밀번호입니다.';
+      case 'auth/weak-password':
+        return '비밀번호는 6글자 이상이어야 합니다.';
+      case 'auth/network-request-failed':
+        return '네트워크 연결에 실패 하였습니다.';
+      case 'auth/invalid-email':
+        return '잘못된 이메일 형식입니다.';
+      case 'auth/internal-error':
+        return '잘못된 요청입니다.';
+      default:
+        return '로그인에 실패하셨습니다.';
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -43,7 +93,7 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           로그인
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={onSubmitSignInHandler}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -54,6 +104,10 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <TextField
             variant="outlined"
@@ -64,6 +118,10 @@ const Login = () => {
             label="비밀번호"
             type="password"
             id="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             // autoComplete="current-password"
           />
           {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
