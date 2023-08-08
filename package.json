@@ -8,6 +8,7 @@
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@mui/icons-material": "^5.14.3",
+    "@mui/joy": "^5.0.0-beta.1",
     "@mui/material": "^5.14.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -29,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "run-server": "json-server --watch db.json --port 4000"
   },
   "eslintConfig": {
     "extends": [
