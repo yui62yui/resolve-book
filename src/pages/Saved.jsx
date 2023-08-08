@@ -1,22 +1,13 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import MyPage from '../components/MyPage';
 import SavedPage from '../components/SavedPage';
-
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 const Saved = () => {
-  const [data, setData] = useState([]);
   const [myButton, setMyButton] = useState(true);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get('http://localhost:4000/test');
-      setData(data);
-    };
-    fetchPosts();
     setMyButton(true);
   }, []);
 
@@ -59,7 +50,7 @@ const Saved = () => {
 
 export default Saved;
 
-const Container = styled.div`
+const Container = styled.body`
   box-sizing: border-box;
 
   width: 100%;
