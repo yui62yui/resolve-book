@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import CardBackgroundImg from '../assets/images/card-bg.png';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { styled } from 'styled-components';
 import { selectedPostAtom, userAtom } from '../store';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 const Community = () => {
   const user = useAtomValue(userAtom);
@@ -31,12 +33,51 @@ const Community = () => {
     }
   };
 
-  const likedButtonClickHandler = () => {
-    alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
+  const likedCounter = async (post, emotion) => {
+    try {
+      const updatedLiked = {
+        ...post.liked,
+        [emotion]: post.liked[emotion] + 1
+      };
+
+      const updatedPost = {
+        ...post,
+        liked: updatedLiked
+      };
+      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+      setSelectedPost(updatedPost);
+
+      alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
+    } catch (error) {
+      alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+    }
+  };
+
+  const changeSavedHandler = async (post) => {
+    try {
+      const updatedPost = {
+        ...post,
+        saved: !post.saved
+      };
+
+      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+
+      setSelectedPost(updatedPost);
+
+      post.saved
+        ? alert('북마크 설정이 해제되었습니다.')
+        : alert('북마크가 설정되었습니다. 보관하신 글은 내 보관함 - 보관한 글 모아보기에서 확인 가능합니다.');
+    } catch (error) {
+      alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+    }
   };
 
   useEffect(() => {
     fetchPosts();
+  }, [selectedPost]);
+
+  useEffect(() => {
+    setSelectedPost(null);
   }, []);
 
   return (
@@ -109,10 +150,41 @@ const Community = () => {
                       <p>
                         {selectedPost?.matchedAdvice.message}
                         <br></br>
-                        <span> - {selectedPost?.matchedAdvice.author} -</span>
+                        <span>
+                          {' '}
+                          - {selectedPost?.matchedAdvice.author} / {selectedPost?.matchedAdvice.authorProfile} -
+                        </span>
                       </p>
                     </div>
-                    <span>2023.08.08</span>
+                    <span>2023.08.08</span>{' '}
+                    <BottomContainer>
+                      <LikedButtonContainer>
+                        <button
+                          onClick={() => {
+                            likedCounter(selectedPost, 'cheer');
+                          }}
+                        >
+                          <span>🙌 </span>
+                          {!!selectedPost === true ? <span>{selectedPost?.liked.cheer}</span> : <span>0</span>}
+                        </button>
+                        <button
+                          onClick={() => {
+                            likedCounter(selectedPost, 'sad');
+                          }}
+                        >
+                          <span>😥 </span>
+                          {!!selectedPost === true ? <span>{selectedPost.liked.sad}</span> : <span>0</span>}
+                        </button>
+                        <button
+                          onClick={() => {
+                            likedCounter(selectedPost, 'empathy');
+                          }}
+                        >
+                          <span>💛 </span>
+                          {!!selectedPost === true ? <span>{selectedPost.liked.empathy}</span> : <span>0</span>}
+                        </button>
+                      </LikedButtonContainer>
+                    </BottomContainer>
                     {/* {selectedPost.uid === user ? <button>삭제하기</button> : ''} */}
                     {selectedPost?.uid === user?.uid ? (
                       <DeleteButton onClick={() => onDeleteButtonClickHandler(selectedPost.id)}>삭제하기</DeleteButton>
@@ -126,22 +198,22 @@ const Community = () => {
                   </div>
                 )}
               </ContentsBox>
-              <BottomContainer>
-                <LikedButtonContainer>
-                  <button onClick={likedButtonClickHandler}>
-                    <span>🙌 </span>
-                    {!!selectedPost === true ? <span>{selectedPost.liked.cheer}</span> : <span>0</span>}
-                  </button>
-                  <button onClick={likedButtonClickHandler}>
-                    <span>😥 </span>
-                    {!!selectedPost === true ? <span>{selectedPost.liked.sad}</span> : <span>0</span>}
-                  </button>
-                  <button onClick={likedButtonClickHandler}>
-                    <span>💛 </span>
-                    {!!selectedPost === true ? <span>{selectedPost.liked.empathy}</span> : <span>0</span>}
-                  </button>
-                </LikedButtonContainer>
-              </BottomContainer>
+              <BookMarkContainer>
+                {!!selectedPost?.uid === true && selectedPost?.uid !== user.uid ? (
+                  <div
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      changeSavedHandler(selectedPost);
+                    }}
+                  >
+                    {selectedPost?.saved ? (
+                      <BookmarkIcon sx={{ fontSize: '150px', color: '#218942' }} />
+                    ) : (
+                      <BookmarkBorderOutlinedIcon sx={{ fontSize: '150px', color: '#218942' }} />
+                    )}
+                  </div>
+                ) : null}
+              </BookMarkContainer>
             </CardContainer>
             ;
             <ModalClose
@@ -170,7 +242,6 @@ const CardContainer = styled.div`
   border-radius: 10px;
   background: center / cover no-repeat url(${CardBackgroundImg});
 `;
-
 const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -185,7 +256,12 @@ const ContentsBox = styled.div`
   color: #333;
 
   & > div > div {
+    margin: 0 auto;
     padding-bottom: 10px;
+  }
+
+  & > div > div:last-of-type {
+    padding-bottom: 0px;
   }
 
   & p {
@@ -224,6 +300,13 @@ const DeleteButton = styled.button`
   &:hover {
     background-color: #9e9e9e;
   }
+`;
+
+const BookMarkContainer = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  cursor: pointer;
 `;
 
 const BottomContainer = styled.div`
