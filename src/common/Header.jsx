@@ -34,10 +34,17 @@ const Header = () => {
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, width: '100%', minWidth: '1400px' }}>
       <AppBar position="static" sx={{ backgroundColor: '#000' }}>
         <Toolbar>
-          <Button style={{ color: 'white' }}>커뮤니티</Button>
+          <Button
+            onClick={() => {
+              navigate('/community');
+            }}
+            style={{ color: 'white' }}
+          >
+            커뮤니티
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {!user ? (
