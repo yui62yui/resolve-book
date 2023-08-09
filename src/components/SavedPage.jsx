@@ -16,8 +16,8 @@ const SavedPage = () => {
     fetchPosts();
   }, []);
 
-  const showPostHandler = async (post) => {
-    await setSelectedData(post);
+  const showPostHandler = (post) => {
+    setSelectedData(post);
   };
 
   return (
@@ -27,18 +27,18 @@ const SavedPage = () => {
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {
-          if (post.saved === true) {
-            return (
-              <ListBox
-                key={post.id}
-                onClick={() => {
-                  showPostHandler(post);
-                }}
-              >
-                <p>{post.userConcern}</p>
-              </ListBox>
-            );
-          }
+          return post.saved ? (
+            <ListBox
+              key={post.id}
+              onClick={() => {
+                showPostHandler(post);
+              }}
+            >
+              <p>{post.userConcern}</p>
+            </ListBox>
+          ) : (
+            ''
+          );
         })}
       </RightContainer>
     </Container>
