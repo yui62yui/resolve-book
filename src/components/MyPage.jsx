@@ -5,12 +5,12 @@ import Card from '../common/Card';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
-import { userAtom } from '../store';
-import { useAtomValue } from 'jotai';
+import { selectedPostAtom, userAtom } from '../store';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 const MyPage = () => {
   const [data, setData] = useState([]);
-  const [selectedData, setSelectedData] = useState();
+  const setSelectedPost = useSetAtom(selectedPostAtom);
 
   const user = useAtomValue(userAtom);
 
@@ -23,8 +23,8 @@ const MyPage = () => {
     fetchPosts();
   }, []);
 
-  const showPostHandler = async (post) => {
-    await setSelectedData(post);
+  const showPostHandler = (post) => {
+    setSelectedPost(post);
   };
 
   const deletePostHandler = async (id) => {
@@ -40,19 +40,21 @@ const MyPage = () => {
   return (
     <Container>
       <LeftContainer>
-        <Card selectedData={selectedData} />
+        <Card />
       </LeftContainer>
       <RightContainer>
-        {data.map((post) => {
-          if (post.uid === user.uid) {
+        {data?.map((post) => {
+          if (post?.uid === user?.uid) {
             return (
-              <ListBox
-                key={post.id}
-                onClick={() => {
-                  showPostHandler(post);
-                }}
-              >
-                <p>{post.userConcern}</p>
+              <ListBoxContainer key={post.id}>
+                <ListBox
+                  key={post.id}
+                  onClick={() => {
+                    showPostHandler(post);
+                  }}
+                >
+                  <p>{post?.userConcern}</p>
+                </ListBox>
                 <Button
                   variant="contained"
                   sx={{
@@ -67,8 +69,10 @@ const MyPage = () => {
                   <DeleteIcon sx={{ fontSize: '18px', marginRight: '5px' }} />
                   <span>삭제</span>
                 </Button>
-              </ListBox>
+              </ListBoxContainer>
             );
+          } else {
+            return null;
           }
         })}
       </RightContainer>
@@ -98,6 +102,20 @@ const RightContainer = styled.div`
   height: 100%;
 `;
 
+const ListBoxContainer = styled.div`
+  position: relative;
+
+  & > button {
+    position: absolute;
+    bottom: 20px;
+    left: 0px;
+    right: 0px;
+    margin: 0 auto;
+    width: 100px;
+    height: 40px;
+  }
+`;
+
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -123,11 +141,5 @@ const ListBox = styled.div`
     line-height: 1.4;
 
     color: #333;
-  }
-
-  & > button {
-    margin: 0 auto;
-    width: 100px;
-    height: 40px;
   }
 `;
