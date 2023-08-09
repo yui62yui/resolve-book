@@ -7,6 +7,7 @@ import { userAtom } from '../store';
 import { useAtomValue } from 'jotai';
 
 const Card = (data) => {
+
   const user = useAtomValue(userAtom);
 
   const selectedPost = data?.selectedData;
@@ -17,6 +18,7 @@ const Card = (data) => {
     alert('북마크 설정이 변경되었습니다.');
     // 이쪽에 saved 를 서로 반대로 바꾸는 로직 넣기, alert도 if문 써서 반대로
   };
+
   return (
     <CardContainer>
       <ContentsBox>
