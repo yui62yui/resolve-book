@@ -3,8 +3,12 @@ import { styled } from 'styled-components';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { userAtom } from '../store';
+import { useAtomValue } from 'jotai';
 
 const Card = (data) => {
+  const user = useAtomValue(userAtom);
+
   const selectedPost = data?.selectedData;
   const likedButtonClickHandler = () => {
     alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
@@ -40,8 +44,7 @@ const Card = (data) => {
           </div>
         )}
       </ContentsBox>
-      {selectedPost?.saved === true && selectedPost?.uid !== '유이' ? (
-        // 유이를 나중에 현재 유저 uid로 변경
+      {selectedPost?.saved === true && selectedPost?.uid !== user.uid ? (
         <BookMarkContainer>
           {selectedPost?.saved === true ? (
             <BookmarkIcon
