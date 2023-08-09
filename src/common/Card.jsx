@@ -31,10 +31,6 @@ const Card = () => {
     }
   };
 
-  const sadCounter = () => {};
-
-  const empathyCounter = () => {};
-
   const changeSavedHandler = async (post) => {
     try {
       const updatedPost = {
@@ -70,7 +66,10 @@ const Card = () => {
               <p>
                 {selectedPost?.matchedAdvice.message}
                 <br></br>
-                <span> - {selectedPost?.matchedAdvice.author} -</span>
+                <span>
+                  {' '}
+                  - {selectedPost?.matchedAdvice.author} / {selectedPost?.matchedAdvice.authorProfile} -
+                </span>
               </p>
             </div>
             <span>2023.08.08</span>
