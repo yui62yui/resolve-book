@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { userAtom } from '../store';
-import { useAtomValue } from 'jotai';
+import { selectedPostAtom, userAtom } from '../store';
+import { useAtom, useAtomValue } from 'jotai';
+import axios from 'axios';
 
-const Card = (data) => {
+const Card = () => {
   const user = useAtomValue(userAtom);
+  const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
-  const selectedPost = data?.selectedData;
-
-  const likedButtonClickHandler = () => {
-    alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
+  const likedButtonClickHandler = async (post, emotion) => {
+    // try {
+    //   await axios.put(`http://localhost:4000/test/${id}`);
+    //   alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
+    // } catch (error) {
+    //   alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+    // }
   };
-  const changeSavedHandler = (saved) => {
-    alert('북마크 설정이 변경되었습니다.');
-    // 이쪽에 saved 를 서로 반대로 바꾸는 로직 넣기, alert도 if문 써서 반대로
+
+  const changeSavedHandler = async (post) => {
+    try {
+      const updatedPost = {
+        ...post,
+        saved: !post.saved
+      };
+
+      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+
+      setSelectedPost(updatedPost);
+
+      post.saved
+        ? alert('북마크 설정이 해제되었습니다.')
+        : alert('북마크가 설정되었습니다. 보관하신 글은 내 보관함 - 보관한 글 모아보기에서 확인 가능합니다.');
+    } catch (error) {
+      alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+    }
   };
 
   return (
@@ -39,6 +59,34 @@ const Card = (data) => {
               </p>
             </div>
             <span>2023.08.08</span>
+            <BottomContainer>
+              <LikedButtonContainer>
+                <button
+                  onClick={() => {
+                    likedButtonClickHandler(selectedPost, 'cheer');
+                  }}
+                >
+                  <span>🙌 </span>
+                  {!!selectedPost === true ? <span>{selectedPost?.liked.cheer}</span> : <span>0</span>}
+                </button>
+                <button
+                  onClick={() => {
+                    likedButtonClickHandler(selectedPost, 'sad');
+                  }}
+                >
+                  <span>😥 </span>
+                  {!!selectedPost === true ? <span>{selectedPost.liked.sad}</span> : <span>0</span>}
+                </button>
+                <button
+                  onClick={() => {
+                    likedButtonClickHandler(selectedPost, 'empathy');
+                  }}
+                >
+                  <span>💛 </span>
+                  {!!selectedPost === true ? <span>{selectedPost.liked.empathy}</span> : <span>0</span>}
+                </button>
+              </LikedButtonContainer>
+            </BottomContainer>
           </div>
         ) : (
           <div>
@@ -67,22 +115,6 @@ const Card = (data) => {
       ) : (
         <></>
       )}
-      <BottomContainer>
-        <LikedButtonContainer>
-          <button onClick={likedButtonClickHandler}>
-            <span>🙌 </span>
-            {!!selectedPost === true ? <span>{selectedPost.liked.cheer}</span> : <span>0</span>}
-          </button>
-          <button onClick={likedButtonClickHandler}>
-            <span>😥 </span>
-            {!!selectedPost === true ? <span>{selectedPost.liked.sad}</span> : <span>0</span>}
-          </button>
-          <button onClick={likedButtonClickHandler}>
-            <span>💛 </span>
-            {!!selectedPost === true ? <span>{selectedPost.liked.empathy}</span> : <span>0</span>}
-          </button>
-        </LikedButtonContainer>
-      </BottomContainer>
     </CardContainer>
   );
 };
@@ -113,6 +145,10 @@ const ContentsBox = styled.div`
 
   & > div > div {
     padding-bottom: 10px;
+  }
+
+  & > div > div:last-of-type {
+    padding-bottom: 0px;
   }
 
   & p {
