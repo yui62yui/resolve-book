@@ -24,6 +24,7 @@ const BackgroundContainer = styled.div`
   background-repeat: no-repeat;
   background-attachment: fixed;
   width: 100%;
+  min-width: 1400px;
   min-height: 100vh;
   height: auto;
   padding: 100px 50px;

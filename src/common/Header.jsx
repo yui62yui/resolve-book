@@ -15,7 +15,6 @@ const Header = () => {
   const navigate = useNavigate();
   // Atom을 읽고 상태 업데이트
   const [user, setUser] = useAtom(userAtom);
-
   const handleLogout = async () => {
     try {
       await signOut(auth); // Firebase에서 로그아웃 처리
@@ -62,7 +61,14 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Button style={{ color: 'white' }}>내 보관함</Button>
+                <Button
+                  style={{ color: 'white' }}
+                  onClick={() => {
+                    navigate(`/saved/${user.uid}`);
+                  }}
+                >
+                  내 보관함
+                </Button>
                 <Button onClick={handleLogout} style={{ color: 'white' }}>
                   로그아웃
                 </Button>
