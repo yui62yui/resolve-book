@@ -23,6 +23,10 @@ const MyPage = () => {
     fetchPosts();
   }, [selectedPost]);
 
+  useEffect(() => {
+    setSelectedPost(null);
+  }, []);
+
   const showPostHandler = (post) => {
     setSelectedPost(post);
   };
@@ -32,6 +36,7 @@ const MyPage = () => {
     try {
       await axios.delete(`http://localhost:4000/test/${id}`);
       fetchPosts();
+      setSelectedPost(null);
     } catch (error) {
       alert('에러발생');
     }

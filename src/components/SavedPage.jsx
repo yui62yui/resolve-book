@@ -18,6 +18,10 @@ const SavedPage = () => {
     fetchPosts();
   }, [selectedPost]);
 
+  useEffect(() => {
+    setSelectedPost(null);
+  }, []);
+
   const showPostHandler = (post) => {
     setSelectedPost(post);
   };
