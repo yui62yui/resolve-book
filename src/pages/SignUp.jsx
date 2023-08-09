@@ -94,14 +94,18 @@ const SignUp = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '3px' }}
+      component="main"
+      maxWidth="xs"
+    >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          회원가입{' '}
+          회원가입
         </Typography>
         <form className={classes.form} noValidate onSubmit={onSubmitSignUpHandler}>
           <Grid container spacing={2}>
