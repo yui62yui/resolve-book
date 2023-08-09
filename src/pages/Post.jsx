@@ -5,8 +5,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import backgroundImg from '../assets/images/bg.png';
 import { kadvice } from 'kadvice';
-import { useAtom } from 'jotai';
-import { postAtom } from '../atoms/postAtom';
 import { Input } from '@mui/material';
 
 const Post = () => {
