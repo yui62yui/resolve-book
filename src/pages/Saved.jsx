@@ -3,14 +3,18 @@ import styled from 'styled-components';
 import MyPage from '../components/MyPage';
 import SavedPage from '../components/SavedPage';
 import Stack from '@mui/material/Stack';
+import { useAtom } from 'jotai';
+import { menuTitleAtom } from '../store';
 
 const Saved = () => {
   const [myButton, setMyButton] = useState(true);
+  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
 
   useEffect(() => {
     setMyButton(true);
     const btn = document.querySelector('.myButton');
     btn.classList.add(`active`);
+    setMenuTitle('글 보관함');
   }, []);
 
   const buttonActiveHandler = (e) => {

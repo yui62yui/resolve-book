@@ -1,20 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { userAtom } from '../store';
+import { menuTitleAtom, userAtom } from '../store';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
+import { styled } from 'styled-components';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   // Atom을 읽고 상태 업데이트
   const [user, setUser] = useAtom(userAtom);
+  const [rightMenuText, setRightMenuText] = useState('');
+  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
+
+  useEffect(() => {
+    let text = '';
+
+    if (pathname === '/community' || pathname === '/') {
+      text = '내 보관함';
+    } else {
+      text = '새 고민 올리기';
+    }
+    setRightMenuText(text);
+  }, [pathname]);
+
+  const rightMenuClickHandler = () => {
+    if (pathname === '/community' || pathname === '/') {
+      navigate(`/saved/${user.uid}`);
+    } else {
+      navigate(`/`);
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await signOut(auth); // Firebase에서 로그아웃 처리
@@ -34,18 +58,33 @@ const Header = () => {
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
-    <Box sx={{ flexGrow: 1, width: '100%', minWidth: '1400px' }}>
+    <Box sx={{ width: '100%', minWidth: '1400px' }}>
       <AppBar position="static" sx={{ backgroundColor: '#000' }}>
-        <Toolbar>
-          <Button
-            onClick={() => {
-              navigate('/community');
-            }}
-            style={{ color: 'white' }}
-          >
-            커뮤니티
-          </Button>
-          <Box sx={{ flexGrow: 1 }} />
+        <StyleToolbar>
+          <Box>
+            {pathname === '/community' ? (
+              <Button
+                onClick={() => {
+                  navigate('/');
+                }}
+                style={{ color: 'white' }}
+              >
+                <p>새 고민 올리기</p>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  navigate('/community');
+                }}
+                style={{ color: 'white' }}
+              >
+                <p>커뮤니티</p>
+              </Button>
+            )}
+          </Box>
+          <Box>
+            <p>{menuTitle}</p>
+          </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {!user ? (
               <>
@@ -68,13 +107,8 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Button
-                  style={{ color: 'white' }}
-                  onClick={() => {
-                    navigate(`/saved/${user.uid}`);
-                  }}
-                >
-                  내 보관함
+                <Button style={{ color: 'white' }} onClick={rightMenuClickHandler}>
+                  {rightMenuText}
                 </Button>
                 <Button onClick={handleLogout} style={{ color: 'white' }}>
                   로그아웃
@@ -94,10 +128,31 @@ const Header = () => {
               <MoreIcon />
             </IconButton>
           </Box>
-        </Toolbar>
+        </StyleToolbar>
       </AppBar>
     </Box>
   );
 };
 
 export default Header;
+
+const StyleToolbar = styled(Toolbar)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64.44px;
+
+  & > div {
+    /* background-color: white; */
+    width: 33.333%;
+    height: 100%;
+    text-align: center;
+  }
+
+  & > div:nth-child(2) > p {
+    margin: 0;
+    line-height: 64.43px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+`;

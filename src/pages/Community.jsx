@@ -6,13 +6,15 @@ import CardBackgroundImg from '../assets/images/card-bg.png';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { styled } from 'styled-components';
-import { selectedPostAtom, userAtom } from '../store';
+import { menuTitleAtom, selectedPostAtom, userAtom } from '../store';
 import { useAtom, useAtomValue } from 'jotai';
 
 const Community = () => {
   const user = useAtomValue(userAtom);
 
   const [open, setOpen] = React.useState(false);
+
+  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
   // jotai로 selectedPost관리
   const [posts, setPosts] = useState();
@@ -78,6 +80,7 @@ const Community = () => {
 
   useEffect(() => {
     setSelectedPost(null);
+    setMenuTitle('고민의 장');
   }, []);
 
   return (

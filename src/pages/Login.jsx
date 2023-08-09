@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { menuTitleAtom } from '../store';
+import { useAtom } from 'jotai';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +37,12 @@ const useStyles = makeStyles((theme) => ({
 
 // Login 컴포넌트  ----------------------------------------------------------------------
 const Login = () => {
+  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
+
+  useEffect(() => {
+    setMenuTitle('로그인');
+  }, []);
+
   const classes = useStyles();
   const navigate = useNavigate();
 

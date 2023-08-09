@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -6,11 +6,19 @@ import Container from '@mui/material/Container';
 import backgroundImg from '../assets/images/bg.png';
 import { kadvice } from 'kadvice';
 import { Input } from '@mui/material';
+import { useAtom } from 'jotai';
+import { menuTitleAtom } from '../store';
 
 const Post = () => {
   const [randomAdvice, setRandomAdvice] = useState('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [userConcern, setUserConcern] = useState('');
+
+  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
+
+  useEffect(() => {
+    setMenuTitle('고민해결책');
+  }, []);
 
   const handleShowRandomAdvice = () => {
     const advice = kadvice.getOne();
