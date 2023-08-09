@@ -1,22 +1,22 @@
 import axios from 'axios';
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 import { styled } from 'styled-components';
-import { userAtom } from '../store';
-import { useAtomValue } from 'jotai';
+import { selectedPostAtom, userAtom } from '../store';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 const Community = () => {
   const user = useAtomValue(userAtom);
 
   const [open, setOpen] = React.useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
+  // jotai로 selectedPost관리
   const [posts, setPosts] = useState();
 
   const fetchPosts = async () => {
     const { data } = await axios.get('http://localhost:4000/test');
-    console.log({ data });
     setPosts(data);
   };
 
