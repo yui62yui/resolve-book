@@ -85,7 +85,7 @@ const Header = () => {
           <Box>
             <p>{menuTitle}</p>
           </Box>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {!user ? (
               <>
                 <Button
@@ -146,7 +146,6 @@ const StyleToolbar = styled(Toolbar)`
     /* background-color: white; */
     width: 33.333%;
     height: 100%;
-    text-align: center;
   }
 
   & > div:nth-child(2) > p {
@@ -154,5 +153,10 @@ const StyleToolbar = styled(Toolbar)`
     line-height: 64.43px;
     font-size: 24px;
     font-weight: 400;
+    text-align: center;
+  }
+
+  & > div:last-child {
+    text-align: right;
   }
 `;
