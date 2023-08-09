@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
@@ -10,6 +10,10 @@ import axios from 'axios';
 const Card = () => {
   const user = useAtomValue(userAtom);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
+
+  useEffect(() => {
+    setSelectedPost(null);
+  }, []);
 
   const likedCounter = async (post, emotion) => {
     try {
@@ -45,6 +49,8 @@ const Card = () => {
       post.saved
         ? alert('북마크 설정이 해제되었습니다.')
         : alert('북마크가 설정되었습니다. 보관하신 글은 내 보관함 - 보관한 글 모아보기에서 확인 가능합니다.');
+
+      setSelectedPost(null);
     } catch (error) {
       alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
     }
@@ -108,27 +114,21 @@ const Card = () => {
           </div>
         )}
       </ContentsBox>
-      {selectedPost?.saved === true && selectedPost?.uid !== user.uid ? (
-        <BookMarkContainer>
-          {selectedPost?.saved === true ? (
-            <BookmarkIcon
-              sx={{ fontSize: '150px', color: '#218942' }}
-              onClick={() => {
-                changeSavedHandler(selectedPost);
-              }}
-            />
-          ) : (
-            <BookmarkBorderOutlinedIcon
-              sx={{ fontSize: '150px', color: '#218942' }}
-              onClick={() => {
-                changeSavedHandler(selectedPost);
-              }}
-            />
-          )}
-        </BookMarkContainer>
-      ) : (
-        <></>
-      )}
+      <BookMarkContainer>
+        {!!selectedPost?.uid === true && selectedPost?.uid !== user.uid ? (
+          <div
+            onClick={() => {
+              changeSavedHandler(selectedPost);
+            }}
+          >
+            {selectedPost?.saved ? (
+              <BookmarkIcon sx={{ fontSize: '150px', color: '#218942' }} />
+            ) : (
+              <BookmarkBorderOutlinedIcon sx={{ fontSize: '150px', color: '#218942' }} />
+            )}
+          </div>
+        ) : null}
+      </BookMarkContainer>
     </CardContainer>
   );
 };
