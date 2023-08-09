@@ -7,10 +7,10 @@ import { userAtom } from '../store';
 import { useAtomValue } from 'jotai';
 
 const Card = (data) => {
-
   const user = useAtomValue(userAtom);
 
   const selectedPost = data?.selectedData;
+
   const likedButtonClickHandler = () => {
     alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
   };
