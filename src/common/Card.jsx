@@ -2,31 +2,35 @@ import React from 'react';
 import { styled } from 'styled-components';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 
-const Card = () => {
+const Card = (data) => {
+  const selectedPost = data?.selectedData;
+  console.log({ data });
   return (
     <CardContainer>
       <ContentsBox>
-        <div>
-          <span>나의 고민은...</span>
-          <br></br>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus sequi molestias minus minima? Animi saepe
-            cumque nesciunt mollitia sed. Architecto, quis iure. Voluptatum hic non consequatur explicabo atque id sit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed sequi ipsa eius doloremque. Placeat, maiores
-            cupiditate nam porro ab omnis tempore voluptas illum voluptatem unde sequi dicta magnam ex velit?
-          </p>
-        </div>
-        <div>
-          <span>당신을 위한 조언</span>
-          <br></br>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus sequi molestias minus minima? Animi saepe
-            cumque nesciunt mollitia sed. Architecto, quis iure. Voluptatum hic non consequatur explicabo atque id sit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed sequi ipsa eius doloremque. Placeat, maiores
-            cupiditate nam porro ab omnis tempore voluptas illum voluptatem unde sequi dicta magnam ex velit?
-          </p>
-        </div>
-        <span>2023.08.08</span>
+        {!!selectedPost === true ? (
+          <div>
+            <div>
+              <span>나의 고민은...</span>
+              <br></br>
+              <p>{selectedPost?.userConcern}</p>
+            </div>
+            <div>
+              <span>당신을 위한 조언</span>
+              <br></br>
+              <p>
+                {selectedPost?.matchedAdvice.message}
+                <br></br>
+                <span> - {selectedPost?.matchedAdvice.author} -</span>
+              </p>
+            </div>
+            <span>2023.08.08</span>
+          </div>
+        ) : (
+          <div>
+            <span>글을 선택해 주세요.</span>
+          </div>
+        )}
       </ContentsBox>
       <LikedContainer>공감컨테이너</LikedContainer>
     </CardContainer>
@@ -57,7 +61,7 @@ const ContentsBox = styled.div`
   font-size: 18px;
   color: #333;
 
-  & > div {
+  & > div > div {
     padding-bottom: 10px;
   }
 
@@ -73,7 +77,7 @@ const ContentsBox = styled.div`
     line-height: 1.4;
   }
 
-  & span {
+  & div > span {
     font-size: 20px;
     font-weight: 600;
     font-style: italic;
