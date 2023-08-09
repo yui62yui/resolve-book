@@ -3,7 +3,7 @@ import Router from './shared/Router';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useAtom } from 'jotai';
-import { userAtom } from './store';
+import { userAtom } from './atoms/userAtom';
 // import axios from 'axios';
 
 const App = () => {

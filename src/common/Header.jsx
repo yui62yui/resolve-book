@@ -7,7 +7,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { userAtom } from '../store';
+import { userAtom } from '../atoms/userAtom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 

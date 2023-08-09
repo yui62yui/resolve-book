@@ -12,6 +12,10 @@ import Container from '@material-ui/core/Container';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import GoogleLogin from '../components/GoogleLogin';
+import GithubLogin from '../components/GithubLogin';
+import FacebookLogin from '../components/FacebookLogin';
+import { styled } from 'styled-components';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -87,7 +91,7 @@ const Login = () => {
 
   return (
     <Container
-      style={{ backgroundColor: 'white', width: '450px', height: '500px', paddingTop: '3px' }}
+      style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '1px' }}
       component="main"
       maxWidth="xs"
     >
@@ -132,16 +136,20 @@ const Login = () => {
           />
           {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            로그인{' '}
+            로그인
           </Button>
           <Grid container justifyContent="center">
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                회원가입
-                {/* {"Don't have an account? Sign Up"} */}
-              </Link>
-            </Grid>
+            <Link href="/signup" variant="body2">
+              회원가입
+              {/* {"Don't have an account? Sign Up"} */}
+            </Link>
           </Grid>
+          {/* ------------ Google, Github, Facebook 로그인 연결 -------------*/}
+          <SnsLoginBox>
+            <GoogleLogin />
+            <GithubLogin />
+            <FacebookLogin />
+          </SnsLoginBox>
         </form>
       </div>
     </Container>
@@ -149,3 +157,9 @@ const Login = () => {
 };
 
 export default Login;
+
+const SnsLoginBox = styled.div`
+  display: flex;
+  padding: 65px;
+  justify-content: center;
+`;
