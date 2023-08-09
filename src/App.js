@@ -4,7 +4,6 @@ import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useAtom } from 'jotai';
 import { userAtom } from './store';
-// import axios from 'axios';
 
 const App = () => {
   const [, setUser] = useAtom(userAtom); // userAtom 사용
@@ -20,7 +19,6 @@ const App = () => {
     return () => unsubscribe();
     // setUser 함수가 업데이트될 때만 이펙트가 실행됨
   }, [setUser]);
-
   return <Router />;
 };
 
