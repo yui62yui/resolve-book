@@ -28,7 +28,6 @@ export default GithubLogin;
 
 const StButton = styled.button`
   background-image: url(${GithubButton});
-  /* box-shadow: 1px 2.5px 4px #8d8c8c; */
   background-color: white;
   background-size: cover;
   border-radius: 100%;
