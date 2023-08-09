@@ -11,14 +11,29 @@ const Card = () => {
   const user = useAtomValue(userAtom);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
-  const likedButtonClickHandler = async (post, emotion) => {
-    // try {
-    //   await axios.put(`http://localhost:4000/test/${id}`);
-    //   alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
-    // } catch (error) {
-    //   alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
-    // }
+  const likedCounter = async (post, emotion) => {
+    try {
+      const updatedLiked = {
+        ...post.liked,
+        [emotion]: post.liked[emotion] + 1
+      };
+
+      const updatedPost = {
+        ...post,
+        liked: updatedLiked
+      };
+      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+      setSelectedPost(updatedPost);
+
+      alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
+    } catch (error) {
+      alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+    }
   };
+
+  const sadCounter = () => {};
+
+  const empathyCounter = () => {};
 
   const changeSavedHandler = async (post) => {
     try {
@@ -63,7 +78,7 @@ const Card = () => {
               <LikedButtonContainer>
                 <button
                   onClick={() => {
-                    likedButtonClickHandler(selectedPost, 'cheer');
+                    likedCounter(selectedPost, 'cheer');
                   }}
                 >
                   <span>🙌 </span>
@@ -71,7 +86,7 @@ const Card = () => {
                 </button>
                 <button
                   onClick={() => {
-                    likedButtonClickHandler(selectedPost, 'sad');
+                    likedCounter(selectedPost, 'sad');
                   }}
                 >
                   <span>😥 </span>
@@ -79,7 +94,7 @@ const Card = () => {
                 </button>
                 <button
                   onClick={() => {
-                    likedButtonClickHandler(selectedPost, 'empathy');
+                    likedCounter(selectedPost, 'empathy');
                   }}
                 >
                   <span>💛 </span>

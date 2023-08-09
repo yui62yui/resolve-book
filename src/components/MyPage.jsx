@@ -6,11 +6,11 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { selectedPostAtom, userAtom } from '../store';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useAtom } from 'jotai';
 
 const MyPage = () => {
   const [data, setData] = useState([]);
-  const setSelectedPost = useSetAtom(selectedPostAtom);
+  const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
   const user = useAtomValue(userAtom);
 
@@ -21,7 +21,7 @@ const MyPage = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [selectedPost]);
 
   const showPostHandler = (post) => {
     setSelectedPost(post);
