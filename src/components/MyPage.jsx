@@ -14,11 +14,12 @@ const MyPage = () => {
 
   const user = useAtomValue(userAtom);
 
+  const fetchPosts = async () => {
+    const { data } = await axios.get('http://localhost:4000/test');
+    setData(data);
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get('http://localhost:4000/test');
-      setData(data);
-    };
     fetchPosts();
   }, []);
 
@@ -26,14 +27,19 @@ const MyPage = () => {
     await setSelectedData(post);
   };
 
-  const deletePostHandler = (post) => {
+  const deletePostHandler = async (id) => {
     alert('정말 삭제하시겠습니까?');
+    try {
+      await axios.delete(`http://localhost:4000/test/${id}`);
+      fetchPosts();
+    } catch (error) {
+      alert('에러발생');
+    }
   };
 
   return (
     <Container>
       <LeftContainer>
-        {/* 이쪽에 선택된 데이터를 기반으로 정보를 보여 주면 됨 */}
         <Card selectedData={selectedData} />
       </LeftContainer>
       <RightContainer>
@@ -55,7 +61,7 @@ const MyPage = () => {
                     ':hover': { backgroundColor: '#666' }
                   }}
                   onClick={() => {
-                    deletePostHandler(post);
+                    deletePostHandler(post.id);
                   }}
                 >
                   <DeleteIcon sx={{ fontSize: '18px', marginRight: '5px' }} />
