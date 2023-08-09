@@ -9,25 +9,23 @@ const provider = new GoogleAuthProvider();
 
 const GoogleLogin = () => {
   const navigate = useNavigate();
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // 성공한 경우의 처리
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-        navigate('/');
-      })
-      .catch((error) => {
-        // 실패한 경우의 처리
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+      const user = result.user;
+      console.log('Logged in with Google:', user);
+      // IdP data available using getAdditionalUserInfo(result)
+
+      navigate('/');
+    } catch (error) {
+      console.error('Google login error:', error);
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // const email = error.customData.email;
+      // const credential = GoogleAuthProvider.credentialFromError(error);
+    }
   };
   return (
     <div>

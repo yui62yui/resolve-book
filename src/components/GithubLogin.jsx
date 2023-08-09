@@ -1,9 +1,22 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import GithubButton from '../assets/images/Github.png';
+import { auth, githubProvider } from '../firebaseConfig';
+import { useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
 
 const GithubLogin = () => {
-  const handleGithubLogin = () => {};
+  const navigate = useNavigate();
+  const handleGithubLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+      const user = result.user;
+      console.log('Logged in with GitHub:', user);
+      navigate('/');
+    } catch (error) {
+      console.error('GitHub login error:', error);
+    }
+  };
   return (
     <div>
       <StButton type="button" onClick={handleGithubLogin} />
