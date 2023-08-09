@@ -5,10 +5,14 @@ import Card from '../common/Card';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
+import { userAtom } from '../store';
+import { useAtomValue } from 'jotai';
 
 const MyPage = () => {
   const [data, setData] = useState([]);
   const [selectedData, setSelectedData] = useState();
+
+  const user = useAtomValue(userAtom);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -34,7 +38,7 @@ const MyPage = () => {
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {
-          if (post.uid === '유이') {
+          if (post.uid === user.uid) {
             return (
               <ListBox
                 key={post.id}
