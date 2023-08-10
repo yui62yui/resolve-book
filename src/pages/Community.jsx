@@ -8,15 +8,13 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
 import { useAtom, useAtomValue } from 'jotai';
-import { menuTitleAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const Community = () => {
   // -user정보 받아오기-
   const user = useAtomValue(userAtom);
   // -모달 열고닫기-
   const [open, setOpen] = React.useState(false);
-
-  const [, setMenuTitle] = useAtom(menuTitleAtom);
   // -선택한 모달 상태-
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
   // -post 받아오기-
@@ -83,18 +81,11 @@ const Community = () => {
 
   useEffect(() => {
     setSelectedPost(null);
-    setMenuTitle('고민의 장');
   }, []);
 
   return (
     <div>
-      <h1
-        style={{
-          color: 'white'
-        }}
-      >
-        community 고민의 장
-      </h1>
+      <MainTitle>커뮤니티 : 고민의 장</MainTitle>
       <ListContainer>
         {posts?.map((post) => {
           return (
@@ -348,6 +339,12 @@ const StyleModalClose = styled(ModalClose)`
   height: 50px;
   position: absolute;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+`;
+
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
 `;
 const ListContainer = styled.div`
   display: grid;

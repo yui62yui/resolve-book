@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import HTMLFlipBook from 'react-pageflip';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { useAtom, useAtomValue } from 'jotai';
-import { menuTitleAtom, postAtom, userAtom } from '../atoms/userAtom';
+import { postAtom, userAtom } from '../atoms/userAtom';
 import { Button, Input, Modal } from '@mui/material';
 import axios from 'axios';
 import backgroundImg from '../assets/images/bg.jpg';
@@ -13,6 +13,7 @@ import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
 import { kadvice } from 'kadvice';
 import { FormGroup } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 const Post = (props) => {
   // State
@@ -23,13 +24,8 @@ const Post = (props) => {
   const [submittedConcern, setSubmittedConcern] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
-
-  useEffect(() => {
-    setMenuTitle('고민해결책');
-  }, []);
-
   // useRef를 사용하여 HTMLFlipBook
+  const navigate = useNavigate();
   const flipBookRef = useRef(null);
   const user = useAtomValue(userAtom);
 
@@ -230,23 +226,11 @@ const Post = (props) => {
       </Modal>
     </>
   );
-
-  // 미로그인 시에는 바로 로그인 페이지로 이동
-  // 로그인 시에만 포스트 페이지 정상적으로 보이도록 함
 };
 
 export default Post;
 
-const BackgroundContainer = styled.div`
-  /* background-image: url(${backgroundImg});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: calc(100vh - 64px); */
-
-  // 이 부분 다 지우면 됩니다!
-`;
+const BackgroundContainer = styled.div``;
 
 const StyledContainer = styled.div`
   display: flex;
