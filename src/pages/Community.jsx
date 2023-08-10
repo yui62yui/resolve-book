@@ -99,24 +99,22 @@ const Community = () => {
                   }
                 }}
               >
-                <ListBoxUserConcern>{post.userConcern}</ListBoxUserConcern>
-                <br />
-                <ListBoxMessege>{post.matchedAdvice.message}</ListBoxMessege>
-                <br />
+                <ListPhrasesBox>
+                  <p>{post.userConcern}</p>
+                  <p>{post.matchedAdvice.message}</p>
+                  <p>
+                    {post.matchedAdvice.author} -{post.matchedAdvice.authorProfile}
+                  </p>
+                </ListPhrasesBox>
                 <div>
-                  {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
+                  {post?.uid === user?.uid ? (
+                    <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </ListBoxContents>
-              <div>
-                {post?.uid === user?.uid ? (
-                  <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
-                ) : (
-                  ''
-                )}
-              </div>
             </ListBox>
-
-            // </div>
           );
         })}
       </ListContainer>
@@ -231,6 +229,65 @@ const Community = () => {
 
 export default Community;
 
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
+`;
+const ListContainer = styled.div`
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+`;
+const ListBox = styled.div`
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  background: center / cover no-repeat url(${ListBackgroundImg});
+  cursor: pointer;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: #886715;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(77, 59, 12, 0.2);
+  }
+`;
+const ListBoxContents = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+  padding: 20px 0;
+  text-align: center;
+`;
+
+const ListPhrasesBox = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  & > p {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  & > p:last-child {
+    margin-bottom: 0px;
+  }
+`;
+
 const CardContainer = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -254,11 +311,11 @@ const ContentsBox = styled.div`
   color: #333;
 
   & > div > div {
-    padding-bottom: 10px;
+    padding-bottom: 0px;
   }
 
   & > div > div:last-of-type {
-    padding-bottom: 0px;
+    padding-bottom: 20px;
   }
 
   & p {
@@ -281,7 +338,7 @@ const ContentsBox = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  margin: 20px auto 0;
+  margin: 20px auto;
   width: 120px;
   height: 40px;
   font-size: 16px;
@@ -339,39 +396,4 @@ const StyleModalClose = styled(ModalClose)`
   height: 50px;
   position: absolute;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
-`;
-
-const MainTitle = styled.h3`
-  color: white;
-  font-size: 32px;
-  text-align: center;
-`;
-const ListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  width: 100%;
-  height: 100%;
-`;
-const ListBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
-  height: 200px;
-  max-height: 200px;
-  padding: 5px 50px 10px;
-  border-radius: 10px;
-  background: center / cover no-repeat url(${ListBackgroundImg});
-  cursor: pointer;
-`;
-const ListBoxContents = styled.div`
-  width: 360px;
-  text-align: center;
-`;
-const ListBoxUserConcern = styled.div`
-  font-weight: 350;
-`;
-const ListBoxMessege = styled.div`
-  font-weight: 650;
 `;
