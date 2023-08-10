@@ -87,10 +87,10 @@ const Header = () => {
                     navigate(`/saved/${user.uid}`);
                   }}
                 >
-                  내 보관함
+                  <p>내 보관함</p>
                 </Button>
                 <Button onClick={handleLogout} style={{ color: 'white' }}>
-                  로그아웃
+                  <p>로그아웃</p>
                 </Button>
               </>
             )}
