@@ -3,7 +3,7 @@ import Router from './shared/Router';
 import { auth } from './firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useAtom } from 'jotai';
-import { userAtom } from './store';
+import { userAtom } from './atoms/userAtom';
 // import axios from 'axios';
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
     // onAuthStateChanged 함수를 사용하여 인증 상태 변화 감지
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       // 로그인된 사용자가 있으면 user.email 업데이트, 그게 아니라면 로그아웃 처리
-      user ? setUser(user.email) : setUser(null);
+      user ? setUser(user) : setUser(null);
     });
     // 컴포넌트가 언마운트될 때 옵저버 해제
     return () => unsubscribe();

@@ -6,7 +6,6 @@ import Layout from '../common/Layout';
 import Community from '../pages/Community';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
-
 const Router = () => {
   return (
     <BrowserRouter>
@@ -15,7 +14,7 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Post />} />
-          <Route path="/:id" element={<Saved />} />
+          <Route path="/saved/:id" element={<Saved />} />
           <Route path="/community" element={<Community />} />
         </Route>
       </Routes>

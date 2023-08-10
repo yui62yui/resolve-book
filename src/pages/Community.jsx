@@ -2,10 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
-import Typography from '@mui/joy/Typography';
-import Sheet from '@mui/joy/Sheet';
+import CardBackgroundImg from '../assets/images/card-bg.png';
+import ListBackgroundImg from '../assets/images/list-bg.png';
+import { styled } from 'styled-components';
+import { useAtomValue } from 'jotai';
+import { userAtom } from '../atoms/userAtom';
 
 const Community = () => {
+  const user = useAtomValue(userAtom);
   const [open, setOpen] = React.useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [posts, setPosts] = useState();
@@ -14,25 +18,33 @@ const Community = () => {
     console.log({ data });
     setPosts(data);
   };
-
+  const onDeleteButtonClickHandler = async (postId) => {
+    try {
+      await axios.delete(`http://localhost:4000/test/${postId}`);
+      fetchPosts(); // 다시 패치
+      setOpen(false); // 모달 닫기
+      setSelectedPost(null);
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
   useEffect(() => {
     fetchPosts();
   }, []);
 
   return (
     <div>
-      <h1>community 고민의 장</h1>
+      <h1
+        style={{
+          color: 'white'
+        }}
+      >
+        community 고민의 장
+      </h1>
       <div>
         {posts?.map((post) => {
           return (
             <div
-              onClick={() => {
-                const selectPost = posts.find((item) => post.id === item.id);
-                setOpen(true);
-                if (selectPost) {
-                  setSelectedPost(selectPost);
-                }
-              }}
               key={post.id}
               style={{
                 border: '1px solid white',
@@ -41,10 +53,27 @@ const Community = () => {
                 color: 'white'
               }}
             >
-              <div>{post.userConcern}</div>
-              <div>{post.matchedAdvice.message}</div>
+              <div
+                onClick={() => {
+                  const selectPost = posts?.find((item) => post.id === item.id);
+                  setOpen(true);
+                  if (selectPost) {
+                    setSelectedPost(selectPost);
+                  }
+                }}
+              >
+                <div>{post.userConcern}</div>
+                <div>{post.matchedAdvice.message}</div>
+                <div>
+                  {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
+                </div>
+              </div>
               <div>
-                {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
+                {post?.uid === user?.uid ? (
+                  <button onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</button>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           );
@@ -56,36 +85,57 @@ const Community = () => {
           aria-describedby="modal-desc"
           open={open}
           onClose={() => setOpen(false)}
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
         >
-          <Sheet
-            variant="outlined"
-            sx={{
-              maxWidth: 500,
-              borderRadius: 'md',
-              p: 3,
-              boxShadow: 'lg'
-            }}
-          >
+          <>
+            <CardContainer>
+              <div style={{ position: 'relative' }}>
+                <ContentsBox>
+                  {!!selectedPost === true ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <div>
+                        <span>나의 고민은...</span>
+                        <br></br>
+                        <p>{selectedPost?.userConcern}</p>
+                      </div>
+                      <div>
+                        <span>당신을 위한 조언</span>
+                        <br></br>
+                        <p>
+                          {selectedPost?.matchedAdvice.message}
+                          <br></br>
+                          <span> - {selectedPost?.matchedAdvice.author} -</span>
+                        </p>
+                      </div>
+                      <span>2023.08.08</span>
+                      {selectedPost?.uid === user?.uid ? (
+                        <button onClick={() => onDeleteButtonClickHandler(selectedPost.id)}>삭제하기</button>
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      <span>글을 선택해 주세요.</span>
+                    </div>
+                  )}
+                </ContentsBox>
+                <LikedContainer>공감컨테이너</LikedContainer>
+              </div>
+            </CardContainer>
             <ModalClose
               variant="outlined"
               sx={{
-                top: 'calc(-1/4 * var(--IconButton-size))',
-                right: 'calc(-1/4 * var(--IconButton-size))',
-                boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
+                boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.2)',
                 borderRadius: '50%',
                 bgcolor: 'background.surface'
               }}
             />
-            <Typography component="h2" id="modal-title" level="h4" textColor="inherit" fontWeight="lg" mb={1}>
-              {selectedPost?.userConcern}
-            </Typography>
-            <Typography id="modal-desc" textColor="text.tertiary">
-              {selectedPost?.matchedAdvice.message}
-              <br />
-              {selectedPost?.matchedAdvice.author}&nbsp;-{selectedPost?.matchedAdvice.authorProfile}
-            </Typography>
-          </Sheet>
+          </>
         </Modal>
       </React.Fragment>
     </div>
@@ -93,3 +143,85 @@ const Community = () => {
 };
 
 export default Community;
+
+const CardContainer = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  width: 650px;
+  height: 950px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background: center / cover no-repeat url(${CardBackgroundImg});
+`;
+
+const ContentsBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 50%;
+  height: 100%;
+  margin: 260px auto;
+
+  font-size: 18px;
+  color: #333;
+
+  & > div > div {
+    padding-bottom: 10px;
+  }
+
+  & p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+
+    letter-spacing: -0.5px;
+    line-height: 1.4;
+  }
+
+  & div > span {
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+  }
+`;
+
+const LikedContainer = styled.div`
+  /* position: absolute; */
+  left: 0;
+  bottom: 0;
+  width: 650px;
+  height: 40px;
+  background-color: #666;
+`;
+
+// const ListBox = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   box-sizing: border-box;
+//   height: 200px;
+//   max-height: 200px;
+//   padding: 5px 30px 10px;
+//   border-radius: 10px;
+//   background: center / cover no-repeat url(${ListBackgroundImg});
+//   cursor: pointer;
+
+//   & > p {
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     display: -webkit-box;
+//     -webkit-line-clamp: 6;
+//     -webkit-box-orient: vertical;
+
+//     font-size: 18px;
+//     font-weight: 400;
+//     letter-spacing: -0.5px;
+//     line-height: 1.4;
+
+//     color: #333;
+//   }
+// `;

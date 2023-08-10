@@ -4,7 +4,7 @@ import HTMLFlipBook from 'react-pageflip';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { useAtom, useAtomValue } from 'jotai';
-import { userAtom, postAtom } from '../store';
+import { postAtom, userAtom } from '../atoms/userAtom';
 import { Button, Input, Modal } from '@mui/material';
 import axios from 'axios';
 import backgroundImg from '../assets/images/bg.png';

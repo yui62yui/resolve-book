@@ -1,14 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Button from '@mui/material/Button';
-
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Card from '../common/Card';
+import ListBackgroundImg from '../assets/images/list-bg.png';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
+  const [selectedData, setSelectedData] = useState();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -18,33 +16,29 @@ const SavedPage = () => {
     fetchPosts();
   }, []);
 
+  const showPostHandler = (post) => {
+    setSelectedData(post);
+  };
+
   return (
     <Container>
       <LeftContainer>
-        <Card />
+        <Card selectedData={selectedData} />
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {
-          if (post.saved === true) {
-            return (
-              <ListBox>
-                <p>{post.userConcern}</p>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: '#868686',
-                    transition: '0.3s',
-                    ':hover': { backgroundColor: '#666' }
-                  }}
-                >
-                  <IconButton aria-label="delete" size="small">
-                    <DeleteIcon fontSize="inherit" />
-                  </IconButton>
-                  <span style={{ paddingRight: '10px' }}>삭제</span>
-                </Button>
-              </ListBox>
-            );
-          }
+          return post.saved ? (
+            <ListBox
+              key={post.id}
+              onClick={() => {
+                showPostHandler(post);
+              }}
+            >
+              <p>{post.userConcern}</p>
+            </ListBox>
+          ) : (
+            ''
+          );
         })}
       </RightContainer>
     </Container>
@@ -55,8 +49,9 @@ export default SavedPage;
 
 const Container = styled.div`
   width: 80%;
+  min-width: 1000px;
   display: flex;
-  gap: 150px;
+  gap: 80px;
   margin: 0 auto;
 `;
 
@@ -66,7 +61,7 @@ const LeftContainer = styled.div`
 
 const RightContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
   gap: 30px;
   width: 100%;
   height: 100%;
@@ -79,16 +74,16 @@ const ListBox = styled.div`
   box-sizing: border-box;
   height: 200px;
   max-height: 200px;
-  padding: 5px 20px 20px;
+  padding: 5px 30px 10px;
   border-radius: 10px;
-  background-color: white;
+  background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
 
   & > p {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
 
     font-size: 18px;
@@ -97,11 +92,5 @@ const ListBox = styled.div`
     line-height: 1.4;
 
     color: #333;
-  }
-
-  & > button {
-    margin: 0 auto;
-    width: 100px;
-    height: 40px;
   }
 `;
