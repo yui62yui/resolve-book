@@ -7,7 +7,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { menuTitleAtom, postAtom, userAtom } from '../atoms/userAtom';
 import { Button, Input, Modal } from '@mui/material';
 import axios from 'axios';
-import backgroundImg from '../assets/images/bg.png';
+import backgroundImg from '../assets/images/bg.jpg';
 import page1Img from '../assets/images/main_cover.png';
 import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
