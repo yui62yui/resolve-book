@@ -7,10 +7,11 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { menuTitleAtom, userAtom } from '../store';
+
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { styled } from 'styled-components';
+import { menuTitleAtom, userAtom } from '../atoms/userAtom';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const Header = () => {
   const [user, setUser] = useAtom(userAtom);
   const [rightMenuText, setRightMenuText] = useState('');
   const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
-
   useEffect(() => {
     let text = '';
 
