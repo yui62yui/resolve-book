@@ -4,7 +4,7 @@ import MyPage from '../components/MyPage';
 import SavedPage from '../components/SavedPage';
 import Stack from '@mui/material/Stack';
 import { useAtom } from 'jotai';
-import { menuTitleAtom } from '../store';
+import { menuTitleAtom } from '../atoms/userAtom';
 
 const Saved = () => {
   const [myButton, setMyButton] = useState(true);

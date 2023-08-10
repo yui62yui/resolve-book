@@ -8,8 +8,8 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
 
-import { useAtomValue } from 'jotai';
-import { userAtom } from '../atoms/userAtom';
+import { useAtom, useAtomValue } from 'jotai';
+import { menuTitleAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const Community = () => {
   const user = useAtomValue(userAtom);

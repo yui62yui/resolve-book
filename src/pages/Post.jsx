@@ -13,7 +13,6 @@ import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
 import { kadvice } from 'kadvice';
 import { FormGroup } from '@material-ui/core';
-import { Input } from '@mui/material';
 
 const Post = (props) => {
   // State

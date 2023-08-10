@@ -12,8 +12,8 @@ import Container from '@material-ui/core/Container';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
-import { menuTitleAtom } from '../store';
 import { useAtom } from 'jotai';
+import { menuTitleAtom } from '../atoms/userAtom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

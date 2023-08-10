@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { useAtom } from 'jotai';
-import { selectedPostAtom } from '../store';
+import { selectedPostAtom } from '../atoms/userAtom';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
