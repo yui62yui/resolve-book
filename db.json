@@ -49,6 +49,22 @@
       }
     },
     {
+      "uid": "BrPDX1pKD9Tg2OiKzFinTMzPmZ12",
+      "id": 5,
+      "userConcern": "고민내용3",
+      "matchedAdvice": {
+        "author": "프리드리히 니체",
+        "authorProfile": "철학자",
+        "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
+      },
+      "saved": false,
+      "liked": {
+        "cheer": 1231,
+        "sad": 12312,
+        "empathy": 2234
+      }
+    },
+    {
       "uid": "유삼",
       "id": 6,
       "userConcern": "고민내용3",
@@ -65,160 +81,16 @@
       }
     },
     {
-      "uid": {
-        "uid": "FsuqHYeUEkRzgFrOInyuIPnGdSY2",
-        "email": "shj@test.com",
-        "emailVerified": false,
-        "isAnonymous": false,
-        "providerData": [
-          {
-            "providerId": "password",
-            "uid": "shj@test.com",
-            "displayName": null,
-            "email": "shj@test.com",
-            "phoneNumber": null,
-            "photoURL": null
-          }
-        ],
-        "stsTokenManager": {
-          "refreshToken": "AMf-vBxT1mFGwk-SCxwc8u7czj91qaXZQCUhvG18JUbVM-P3v72t5vTl9u8-zDHDQHu2ERd9pvQmx4SJTnTjQxdBkDZVP93LkuP7il0SgtXU7JVGxxsqBCXUz39Of1ULmyAP_rY_tiJ_w2H735vSRVcanWTIrgzlK1PKT3LvhGWsT5wNx1mouSI3P4ckV01WszL0YnU0NMwAk7l-Gf5DbmfeX190tDqVlw",
-          "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNmM2I1YWRhM2NhMzkxNTQ4ZDM1OTJiMzU5MjkyM2UzNjAxMmI5MTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcmVzb2x2ZS1ib29rLTU5MzUwIiwiYXVkIjoicmVzb2x2ZS1ib29rLTU5MzUwIiwiYXV0aF90aW1lIjoxNjkxNTg2NTkxLCJ1c2VyX2lkIjoiRnN1cUhZZVVFa1J6Z0ZyT0lueXVJUG5HZFNZMiIsInN1YiI6IkZzdXFIWWVVRWtSemdGck9Jbnl1SVBuR2RTWTIiLCJpYXQiOjE2OTE2Mjc5NjEsImV4cCI6MTY5MTYzMTU2MSwiZW1haWwiOiJzaGpAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsic2hqQHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.PrNHTaEyVqzKJcXsvcq7-DmDOA6RBfosf3jMOouC9QHrnPohIYBNNHDOkl44wZcNN0hBi1SyUJhqlQ9EOZloqT_K2oomkdPONIHEZQb0v2zDbu2UgU2ymiilEShB7zK6XYaWAuO1WuX67YZsm1chcYsBnR0I1OZ_pLe8cLds88SEzrlVLQFa9Ae15P4sJkdvBhJLjloerxrC5OD7lqMGuEDqsVVHcEfY4Rly1pbaBP1bbR_z82EHz5LjR90Qalb499SgL7Sj2RMZ3pAS7PvP5zEB01EgK8lFyEGzbizLITl9BK2Wf9M18aW-87DQz6zZU5i4Z2UsRJwzURum93x0Xw",
-          "expirationTime": 1691631561378
-        },
-        "createdAt": "1691565709812",
-        "lastLoginAt": "1691586591607",
-        "apiKey": "AIzaSyBZ_4G7RZ3ESzkLPUHqI5ykMe_FgXSKDRM",
-        "appName": "[DEFAULT]"
-      },
-      "id": 8,
-      "userConcern": "assda",
+      "uid": "BrPDX1pKD9Tg2OiKzFinTMzPmZ12",
+      "id": 7,
+      "userConcern": "고민내용3",
       "matchedAdvice": {
-        "author": "유재석",
-        "authorProfile": "코미디언, 국민 MC",
-        "message": "내가 생각하는 범위에서 최선을 다하면 안돼. 그걸 벗어나서 최선을 다해야지 그게 '혼신'이야."
+        "author": "프리드리히 니체",
+        "authorProfile": "철학자",
+        "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
       },
       "saved": false,
-      "like": {
-        "cheer": 0,
-        "sad": 0,
-        "empathy": 0
-      }
-    },
-    {
-      "uid": {
-        "uid": "FsuqHYeUEkRzgFrOInyuIPnGdSY2",
-        "email": "shj@test.com",
-        "emailVerified": false,
-        "isAnonymous": false,
-        "providerData": [
-          {
-            "providerId": "password",
-            "uid": "shj@test.com",
-            "displayName": null,
-            "email": "shj@test.com",
-            "phoneNumber": null,
-            "photoURL": null
-          }
-        ],
-        "stsTokenManager": {
-          "refreshToken": "AMf-vBxT1mFGwk-SCxwc8u7czj91qaXZQCUhvG18JUbVM-P3v72t5vTl9u8-zDHDQHu2ERd9pvQmx4SJTnTjQxdBkDZVP93LkuP7il0SgtXU7JVGxxsqBCXUz39Of1ULmyAP_rY_tiJ_w2H735vSRVcanWTIrgzlK1PKT3LvhGWsT5wNx1mouSI3P4ckV01WszL0YnU0NMwAk7l-Gf5DbmfeX190tDqVlw",
-          "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNmM2I1YWRhM2NhMzkxNTQ4ZDM1OTJiMzU5MjkyM2UzNjAxMmI5MTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcmVzb2x2ZS1ib29rLTU5MzUwIiwiYXVkIjoicmVzb2x2ZS1ib29rLTU5MzUwIiwiYXV0aF90aW1lIjoxNjkxNTg2NTkxLCJ1c2VyX2lkIjoiRnN1cUhZZVVFa1J6Z0ZyT0lueXVJUG5HZFNZMiIsInN1YiI6IkZzdXFIWWVVRWtSemdGck9Jbnl1SVBuR2RTWTIiLCJpYXQiOjE2OTE2Mjc5NjEsImV4cCI6MTY5MTYzMTU2MSwiZW1haWwiOiJzaGpAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsic2hqQHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.PrNHTaEyVqzKJcXsvcq7-DmDOA6RBfosf3jMOouC9QHrnPohIYBNNHDOkl44wZcNN0hBi1SyUJhqlQ9EOZloqT_K2oomkdPONIHEZQb0v2zDbu2UgU2ymiilEShB7zK6XYaWAuO1WuX67YZsm1chcYsBnR0I1OZ_pLe8cLds88SEzrlVLQFa9Ae15P4sJkdvBhJLjloerxrC5OD7lqMGuEDqsVVHcEfY4Rly1pbaBP1bbR_z82EHz5LjR90Qalb499SgL7Sj2RMZ3pAS7PvP5zEB01EgK8lFyEGzbizLITl9BK2Wf9M18aW-87DQz6zZU5i4Z2UsRJwzURum93x0Xw",
-          "expirationTime": 1691631561378
-        },
-        "createdAt": "1691565709812",
-        "lastLoginAt": "1691586591607",
-        "apiKey": "AIzaSyBZ_4G7RZ3ESzkLPUHqI5ykMe_FgXSKDRM",
-        "appName": "[DEFAULT]"
-      },
-      "id": 9,
-      "userConcern": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.",
-      "matchedAdvice": {
-        "author": "에이브러햄 링컨",
-        "authorProfile": "미국 16대 대통령",
-        "message": "반드시 이겨야 하는 건 아니지만 진실할 필요는 있다. 반드시 성공해야 하는 건 아니지만, 소신을 가지고 살아야 할 필요는 있다."
-      },
-      "saved": false,
-      "like": {
-        "cheer": 0,
-        "sad": 0,
-        "empathy": 0
-      }
-    },
-    {
-      "uid": {
-        "uid": "FsuqHYeUEkRzgFrOInyuIPnGdSY2",
-        "email": "shj@test.com",
-        "emailVerified": false,
-        "isAnonymous": false,
-        "providerData": [
-          {
-            "providerId": "password",
-            "uid": "shj@test.com",
-            "displayName": null,
-            "email": "shj@test.com",
-            "phoneNumber": null,
-            "photoURL": null
-          }
-        ],
-        "stsTokenManager": {
-          "refreshToken": "AMf-vBxT1mFGwk-SCxwc8u7czj91qaXZQCUhvG18JUbVM-P3v72t5vTl9u8-zDHDQHu2ERd9pvQmx4SJTnTjQxdBkDZVP93LkuP7il0SgtXU7JVGxxsqBCXUz39Of1ULmyAP_rY_tiJ_w2H735vSRVcanWTIrgzlK1PKT3LvhGWsT5wNx1mouSI3P4ckV01WszL0YnU0NMwAk7l-Gf5DbmfeX190tDqVlw",
-          "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNmM2I1YWRhM2NhMzkxNTQ4ZDM1OTJiMzU5MjkyM2UzNjAxMmI5MTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcmVzb2x2ZS1ib29rLTU5MzUwIiwiYXVkIjoicmVzb2x2ZS1ib29rLTU5MzUwIiwiYXV0aF90aW1lIjoxNjkxNTg2NTkxLCJ1c2VyX2lkIjoiRnN1cUhZZVVFa1J6Z0ZyT0lueXVJUG5HZFNZMiIsInN1YiI6IkZzdXFIWWVVRWtSemdGck9Jbnl1SVBuR2RTWTIiLCJpYXQiOjE2OTE2Mjc5NjEsImV4cCI6MTY5MTYzMTU2MSwiZW1haWwiOiJzaGpAdGVzdC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsic2hqQHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.PrNHTaEyVqzKJcXsvcq7-DmDOA6RBfosf3jMOouC9QHrnPohIYBNNHDOkl44wZcNN0hBi1SyUJhqlQ9EOZloqT_K2oomkdPONIHEZQb0v2zDbu2UgU2ymiilEShB7zK6XYaWAuO1WuX67YZsm1chcYsBnR0I1OZ_pLe8cLds88SEzrlVLQFa9Ae15P4sJkdvBhJLjloerxrC5OD7lqMGuEDqsVVHcEfY4Rly1pbaBP1bbR_z82EHz5LjR90Qalb499SgL7Sj2RMZ3pAS7PvP5zEB01EgK8lFyEGzbizLITl9BK2Wf9M18aW-87DQz6zZU5i4Z2UsRJwzURum93x0Xw",
-          "expirationTime": 1691631561378
-        },
-        "createdAt": "1691565709812",
-        "lastLoginAt": "1691586591607",
-        "apiKey": "AIzaSyBZ_4G7RZ3ESzkLPUHqI5ykMe_FgXSKDRM",
-        "appName": "[DEFAULT]"
-      },
-      "id": 10,
-      "userConcern": "ustry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-      "matchedAdvice": {
-        "author": "셰익스피어",
-        "authorProfile": "극작가, 역사상 가장 위대한 작가",
-        "message": "'지금이 최악'이라고 말할 힘이 있다면 아직 최악은 아니다."
-      },
-      "saved": false,
-      "like": {
-        "cheer": 0,
-        "sad": 0,
-        "empathy": 0
-      }
-    },
-    {
-      "uid": {
-        "uid": "BrPDX1pKD9Tg2OiKzFinTMzPmZ12",
-        "email": "ioexrr@naver.com",
-        "emailVerified": false,
-        "isAnonymous": false,
-        "providerData": [
-          {
-            "providerId": "password",
-            "uid": "ioexrr@naver.com",
-            "displayName": null,
-            "email": "ioexrr@naver.com",
-            "phoneNumber": null,
-            "photoURL": null
-          }
-        ],
-        "stsTokenManager": {
-          "refreshToken": "AMf-vBx-iXqWtxYjnDJjmTTW444zvxso1_j3I1q6mc6qRksoS69LFGuqFgLgYyQZ3dw3A4mqmztHN2PugzJb685s52Na8Y8f24m1y1T2ZAGIGZGA0_UuQ9In5GizCJorexbLqKwCJMzpa05g_V5xlRqLcBtF3uQw-C4HIw5rFb9FzDl4dlTPfIebzjo_YTGA_o9ufsbaeaYh9iIKZgiXQI4IsvkBIEiuYw",
-          "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNmM2I1YWRhM2NhMzkxNTQ4ZDM1OTJiMzU5MjkyM2UzNjAxMmI5MTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcmVzb2x2ZS1ib29rLTU5MzUwIiwiYXVkIjoicmVzb2x2ZS1ib29rLTU5MzUwIiwiYXV0aF90aW1lIjoxNjkxNjI4MTgzLCJ1c2VyX2lkIjoiQnJQRFgxcEtEOVRnMk9pS3pGaW5UTXpQbVoxMiIsInN1YiI6IkJyUERYMXBLRDlUZzJPaUt6RmluVE16UG1aMTIiLCJpYXQiOjE2OTE2MjgxODMsImV4cCI6MTY5MTYzMTc4MywiZW1haWwiOiJpb2V4cnJAbmF2ZXIuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImlvZXhyckBuYXZlci5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.rmxY9hbLff0aQ3ZfsbiMYbRC-XyG3niMkyq-BeRoKjp-shqc2bVVXKokquwOtBAV7v7DR51_mSDa_sZr-TOo0YRD2nW885No_hk9P54z_sLItND_GZPoNjFF42EPsDIdv0kycpdPG1sJyg0kcgqsuq5rQsJCkpZmiR37ViZbCTsyOn5QLA0Bn-iedmd5lVthDiczUZ4P4CswbCUCW9KlvlZUQqe_xHg6_zieaKrG-mTfB6i-mKIhped14HAxDc_k0ioAdCUgU1_o6YjsfJy7AqRH2Gjn28g_gO2vXxjV7ELNftmDMFG3Ig89amImPItlQVNVs-lyXP1lqG8BhdjGog",
-          "expirationTime": 1691631783725
-        },
-        "createdAt": "1691551987927",
-        "lastLoginAt": "1691628183673",
-        "apiKey": "AIzaSyBZ_4G7RZ3ESzkLPUHqI5ykMe_FgXSKDRM",
-        "appName": "[DEFAULT]"
-      },
-      "id": 11,
-      "userConcern": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "matchedAdvice": {
-        "author": "프리드쇼프 난센",
-        "authorProfile": "탐험가",
-        "message": "인생에서 가장 중요한 일은 자기를 발견하는 것이다."
-      },
-      "saved": false,
-      "like": {
+      "liked": {
         "cheer": 0,
         "sad": 0,
         "empathy": 0
