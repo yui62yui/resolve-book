@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import HTMLFlipBook from 'react-pageflip';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { useAtom, useAtomValue } from 'jotai';
-import { menuTitleAtom, postAtom, userAtom } from '../atoms/userAtom';
+import { postAtom, userAtom } from '../atoms/userAtom';
 import { Button, Input, Modal } from '@mui/material';
 import axios from 'axios';
-import backgroundImg from '../assets/images/bg.png';
+import backgroundImg from '../assets/images/bg.jpg';
 import page1Img from '../assets/images/main_cover.png';
 import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
@@ -22,12 +22,6 @@ const Post = (props) => {
   const [userConcern, setUserConcern] = useAtom(postAtom);
   const [submittedConcern, setSubmittedConcern] = useState('');
   const [showModal, setShowModal] = useState(false);
-
-  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
-
-  useEffect(() => {
-    setMenuTitle('고민해결책');
-  }, []);
 
   // useRef를 사용하여 HTMLFlipBook
   const flipBookRef = useRef(null);
@@ -237,16 +231,7 @@ const Post = (props) => {
 
 export default Post;
 
-const BackgroundContainer = styled.div`
-  /* background-image: url(${backgroundImg});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: calc(100vh - 64px); */
-
-  // 이 부분 다 지우면 됩니다!
-`;
+const BackgroundContainer = styled.div``;
 
 const StyledContainer = styled.div`
   display: flex;

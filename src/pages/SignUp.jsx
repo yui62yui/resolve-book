@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,8 +12,6 @@ import Container from '@material-ui/core/Container';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
-import { useAtom } from 'jotai';
-import { menuTitleAtom } from '../atoms/userAtom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,12 +34,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
-  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
-
-  useEffect(() => {
-    setMenuTitle('회원가입');
-  }, []);
-
   const classes = useStyles();
   const navigate = useNavigate();
 

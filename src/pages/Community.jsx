@@ -9,14 +9,13 @@ import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
 
 import { useAtom, useAtomValue } from 'jotai';
-import { menuTitleAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const Community = () => {
   const user = useAtomValue(userAtom);
 
   const [open, setOpen] = React.useState(false);
 
-  const [, setMenuTitle] = useAtom(menuTitleAtom);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
   // jotai로 selectedPost관리
   const [posts, setPosts] = useState();
@@ -82,7 +81,6 @@ const Community = () => {
 
   useEffect(() => {
     setSelectedPost(null);
-    setMenuTitle('고민의 장');
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,8 +16,6 @@ import GoogleLogin from '../components/GoogleLogin';
 import GithubLogin from '../components/GithubLogin';
 import FacebookLogin from '../components/FacebookLogin';
 import { styled } from 'styled-components';
-import { useAtom } from 'jotai';
-import { menuTitleAtom } from '../atoms/userAtom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,12 +39,6 @@ const useStyles = makeStyles((theme) => ({
 
 // Login 컴포넌트  ----------------------------------------------------------------------
 const Login = () => {
-  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
-
-  useEffect(() => {
-    setMenuTitle('로그인');
-  }, []);
-
   const classes = useStyles();
   const navigate = useNavigate();
 
