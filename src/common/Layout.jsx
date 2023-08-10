@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { Outlet } from 'react-router-dom';
-import backgroundImg from '../assets/images/bg.png';
+import backgroundImg from '../assets/images/bg.jpg';
 import styled from 'styled-components';
 
 const Layout = () => {
