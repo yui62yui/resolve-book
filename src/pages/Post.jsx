@@ -13,6 +13,7 @@ import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
 import { kadvice } from 'kadvice';
 import { FormGroup } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 const Post = (props) => {
   // State
@@ -24,6 +25,7 @@ const Post = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   // useRef를 사용하여 HTMLFlipBook
+  const navigate = useNavigate();
   const flipBookRef = useRef(null);
   const user = useAtomValue(userAtom);
 
@@ -224,9 +226,6 @@ const Post = (props) => {
       </Modal>
     </>
   );
-
-  // 미로그인 시에는 바로 로그인 페이지로 이동
-  // 로그인 시에만 포스트 페이지 정상적으로 보이도록 함
 };
 
 export default Post;

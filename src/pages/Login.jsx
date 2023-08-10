@@ -90,69 +90,74 @@ const Login = () => {
   };
 
   return (
-    <Container
-      style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '1px' }}
-      component="main"
-      maxWidth="xs"
-    >
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          로그인
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={onSubmitSignInHandler}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="이메일"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="비밀번호"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            // autoComplete="current-password"
-          />
-          {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+    <>
+      <MainTitle>
+        책을 펼쳐보고 싶으신가요?<br></br>우선 로그인이 필요합니다
+      </MainTitle>
+      <Container
+        style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '1px' }}
+        component="main"
+        maxWidth="xs"
+      >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
             로그인
-          </Button>
-          <Grid container justifyContent="center">
-            <Link href="/signup" variant="body2">
-              회원가입
-              {/* {"Don't have an account? Sign Up"} */}
-            </Link>
-          </Grid>
-          {/* ------------ Google, Github, Facebook 로그인 연결 -------------*/}
-          <SnsLoginBox>
-            <GoogleLogin />
-            <GithubLogin />
-            <FacebookLogin />
-          </SnsLoginBox>
-        </form>
-      </div>
-    </Container>
+          </Typography>
+          <form className={classes.form} noValidate onSubmit={onSubmitSignInHandler}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="이메일"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="비밀번호"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              // autoComplete="current-password"
+            />
+            {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
+            <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+              로그인
+            </Button>
+            <Grid container justifyContent="center">
+              <Link href="/signup" variant="body2">
+                회원가입
+                {/* {"Don't have an account? Sign Up"} */}
+              </Link>
+            </Grid>
+            {/* ------------ Google, Github, Facebook 로그인 연결 -------------*/}
+            <SnsLoginBox>
+              <GoogleLogin />
+              <GithubLogin />
+              <FacebookLogin />
+            </SnsLoginBox>
+          </form>
+        </div>
+      </Container>
+    </>
   );
 };
 
@@ -162,4 +167,10 @@ const SnsLoginBox = styled.div`
   display: flex;
   padding: 65px;
   justify-content: center;
+`;
+
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
 `;

@@ -27,6 +27,6 @@ const BackgroundContainer = styled.div`
   min-width: 1400px;
   min-height: 100vh;
   height: auto;
-  padding: 100px 50px;
+  padding: 50px;
   box-sizing: border-box;
 `;

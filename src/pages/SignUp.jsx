@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebaseConfig';
+import { styled } from 'styled-components';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -94,84 +95,93 @@ const SignUp = () => {
   };
 
   return (
-    <Container
-      style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '3px' }}
-      component="main"
-      maxWidth="xs"
-    >
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          회원가입
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={onSubmitSignUpHandler}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="이메일"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
+    <>
+      <MainTitle>회원가입</MainTitle>
+      <Container
+        style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '3px' }}
+        component="main"
+        maxWidth="xs"
+      >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            회원가입
+          </Typography>
+          <form className={classes.form} noValidate onSubmit={onSubmitSignUpHandler}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="이메일"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="비밀번호"
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirm-password"
+                  label="비밀번호 확인"
+                  type="password"
+                  id="confirm-password"
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}></Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="비밀번호"
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+            <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+              회원가입{' '}
+            </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  {/* Already have an account? Sign in */}
+                  로그인
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="confirm-password"
-                label="비밀번호 확인"
-                type="password"
-                id="confirm-password"
-                value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}></Grid>
-          </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-            회원가입{' '}
-          </Button>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Link href="/login" variant="body2">
-                {/* Already have an account? Sign in */}
-                로그인
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </div>
+      </Container>
+    </>
   );
 };
 
 export default SignUp;
+
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
+`;

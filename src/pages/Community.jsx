@@ -85,13 +85,7 @@ const Community = () => {
 
   return (
     <div>
-      <h1
-        style={{
-          color: 'white'
-        }}
-      >
-        community 고민의 장
-      </h1>
+      <MainTitle>커뮤니티 : 고민의 장</MainTitle>
       <div>
         {posts?.map((post) => {
           return (
@@ -350,6 +344,12 @@ const StyleModalClose = styled(ModalClose)`
   height: 50px;
   position: absolute;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+`;
+
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
 `;
 
 // const ListBox = styled.div`
