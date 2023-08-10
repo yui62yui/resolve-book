@@ -5,8 +5,8 @@ import Card from '../common/Card';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
-import { userAtom } from '../store';
 import { useAtomValue } from 'jotai';
+import { userAtom } from '../atoms/userAtom';
 
 const MyPage = () => {
   const [data, setData] = useState([]);

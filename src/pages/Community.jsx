@@ -5,8 +5,8 @@ import ModalClose from '@mui/joy/ModalClose';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
-import { userAtom } from '../store';
 import { useAtomValue } from 'jotai';
+import { userAtom } from '../atoms/userAtom';
 
 const Community = () => {
   const user = useAtomValue(userAtom);

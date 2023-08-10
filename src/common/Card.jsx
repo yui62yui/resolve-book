@@ -3,11 +3,10 @@ import { styled } from 'styled-components';
 import CardBackgroundImg from '../assets/images/card-bg.png';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { userAtom } from '../store';
 import { useAtomValue } from 'jotai';
+import { userAtom } from '../atoms/userAtom';
 
 const Card = (data) => {
-
   const user = useAtomValue(userAtom);
 
   const selectedPost = data?.selectedData;
