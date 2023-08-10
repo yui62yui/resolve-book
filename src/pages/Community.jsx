@@ -224,16 +224,16 @@ const Community = () => {
                   </div>
                 ) : null}
               </BookMarkContainer>
+              <StyleModalClose
+                variant="outlined"
+                sx={{
+                  borderRadius: '50%',
+                  bgcolor: 'background.surface',
+                  top: '20px',
+                  right: '20px'
+                }}
+              />
             </CardContainer>
-            ;
-            <ModalClose
-              variant="outlined"
-              sx={{
-                boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.2)',
-                borderRadius: '50%',
-                bgcolor: 'background.surface'
-              }}
-            />
           </>
         </Modal>
       </React.Fragment>
@@ -346,6 +346,14 @@ const LikedButtonContainer = styled.div`
     }
   }
 `;
+
+const StyleModalClose = styled(ModalClose)`
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+`;
+
 // const ListBox = styled.div`
 //   display: flex;
 //   flex-direction: column;
