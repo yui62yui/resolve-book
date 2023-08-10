@@ -1,15 +1,15 @@
 import axios from 'axios';
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import CardBackgroundImg from '../assets/images/card-bg.png';
+import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
 import { userAtom } from '../store';
 import { useAtomValue } from 'jotai';
 
 const Community = () => {
   const user = useAtomValue(userAtom);
-  console.log(user);
   const [open, setOpen] = React.useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [posts, setPosts] = useState();
@@ -23,7 +23,7 @@ const Community = () => {
       await axios.delete(`http://localhost:4000/test/${postId}`);
       fetchPosts(); // 다시 패치
       setOpen(false); // 모달 닫기
-      setSelectedPost(null); // Clear selected post after deletion
+      setSelectedPost(null);
     } catch (error) {
       console.error('Error deleting post:', error);
     }
@@ -34,7 +34,13 @@ const Community = () => {
 
   return (
     <div>
-      <h1>community 고민의 장</h1>
+      <h1
+        style={{
+          color: 'white'
+        }}
+      >
+        community 고민의 장
+      </h1>
       <div>
         {posts?.map((post) => {
           return (
@@ -53,7 +59,6 @@ const Community = () => {
                   setOpen(true);
                   if (selectPost) {
                     setSelectedPost(selectPost);
-                    // console.log(selectedPost.uid);
                   }
                 }}
               >
@@ -64,7 +69,7 @@ const Community = () => {
                 </div>
               </div>
               <div>
-                {post.uid === '유이' ? (
+                {post?.uid === user?.uid ? (
                   <button onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</button>
                 ) : (
                   ''
@@ -107,8 +112,7 @@ const Community = () => {
                         </p>
                       </div>
                       <span>2023.08.08</span>
-                      {/* {selectedPost.uid === user ? <button>삭제하기</button> : ''} */}
-                      {selectedPost.uid === '유이' ? (
+                      {selectedPost?.uid === user?.uid ? (
                         <button onClick={() => onDeleteButtonClickHandler(selectedPost.id)}>삭제하기</button>
                       ) : (
                         ''
@@ -124,7 +128,7 @@ const Community = () => {
               </div>
             </CardContainer>
             <ModalClose
-              // variant="outlined"
+              variant="outlined"
               sx={{
                 boxShadow: '0 2px 12px 0 rgba(0, 0, 0, 0.2)',
                 borderRadius: '50%',
@@ -193,3 +197,31 @@ const LikedContainer = styled.div`
   height: 40px;
   background-color: #666;
 `;
+
+// const ListBox = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   box-sizing: border-box;
+//   height: 200px;
+//   max-height: 200px;
+//   padding: 5px 30px 10px;
+//   border-radius: 10px;
+//   background: center / cover no-repeat url(${ListBackgroundImg});
+//   cursor: pointer;
+
+//   & > p {
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     display: -webkit-box;
+//     -webkit-line-clamp: 6;
+//     -webkit-box-orient: vertical;
+
+//     font-size: 18px;
+//     font-weight: 400;
+//     letter-spacing: -0.5px;
+//     line-height: 1.4;
+
+//     color: #333;
+//   }
+// `;
