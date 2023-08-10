@@ -152,7 +152,7 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span>2023.08.08</span>{' '}
+                    <span style={{ paddingBottom: '20px' }}>2023.08.08</span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
@@ -269,22 +269,36 @@ const ListBoxContents = styled.div`
   width: 80%;
   height: 100%;
   margin: 0px auto;
-  padding: 20px 0;
   text-align: center;
 `;
 
 const ListPhrasesBox = styled.div`
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
+
+  padding: 20px 0;
   & > p {
     margin-top: 0px;
     margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1.4;
+    color: #333;
+  }
+  & > p:nth-child(2) {
+    font-weight: 500;
+    font-size: 16px;
+    font-style: italic;
+
+    color: #000;
   }
   & > p:last-child {
+    font-size: 14px;
     margin-bottom: 0px;
+    color: #666;
   }
 `;
 
@@ -338,7 +352,7 @@ const ContentsBox = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  margin: 20px auto;
+  margin: 0px auto 20px;
   width: 120px;
   height: 40px;
   font-size: 16px;
