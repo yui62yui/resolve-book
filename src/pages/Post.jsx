@@ -55,7 +55,7 @@ const Post = (props) => {
       }
       // 서버로 데이터 전송
       await axios.post('http://localhost:4000/test', {
-        uid: user,
+        uid: user.uid,
         id: '',
         userConcern: userConcern,
         matchedAdvice: {
@@ -64,7 +64,7 @@ const Post = (props) => {
           message: advice.message
         },
         saved: false,
-        like: {
+        liked: {
           cheer: 0,
           sad: 0,
           empathy: 0
