@@ -71,12 +71,14 @@ const Post = () => {
 export default Post;
 
 const BackgroundContainer = styled.div`
-  background-image: url(${backgroundImg});
+  /* background-image: url(${backgroundImg});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 64px); */
+
+  // 이 부분 다 지우면 됩니다!
 `;
 
 const StyledContainer = styled.div`
