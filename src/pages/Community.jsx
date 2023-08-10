@@ -7,35 +7,35 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
-
 import { useAtom, useAtomValue } from 'jotai';
 import { selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const Community = () => {
+  // -user정보 받아오기-
   const user = useAtomValue(userAtom);
-
+  // -모달 열고닫기-
   const [open, setOpen] = React.useState(false);
-
+  // -선택한 모달 상태-
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
-  // jotai로 selectedPost관리
+  // -post 받아오기-
   const [posts, setPosts] = useState();
-
+  // -서버에서 post데이터받아오기-
   const fetchPosts = async () => {
     const { data } = await axios.get('http://localhost:4000/test');
-    setPosts(data);
+    setPosts(data); // 데이터를 posts에 넣기
   };
-
+  // -삭제 버튼 클릭 핸들러-
   const onDeleteButtonClickHandler = async (postId) => {
     try {
       await axios.delete(`http://localhost:4000/test/${postId}`);
       fetchPosts(); // 다시 패치
       setOpen(false); // 모달 닫기
-      setSelectedPost(null);
+      setSelectedPost(null); // 선택된 게시글 초기화
     } catch (error) {
       console.error('Error deleting post:', error);
     }
   };
-
+  // -공감버튼 부분 -
   const likedCounter = async (post, emotion) => {
     try {
       const updatedLiked = {
@@ -55,7 +55,7 @@ const Community = () => {
       alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
     }
   };
-
+  // -북마크 기능 핸들러-
   const changeSavedHandler = async (post) => {
     try {
       const updatedPost = {
@@ -86,19 +86,11 @@ const Community = () => {
   return (
     <div>
       <MainTitle>커뮤니티 : 고민의 장</MainTitle>
-      <div>
+      <ListContainer>
         {posts?.map((post) => {
           return (
-            <div
-              key={post.id}
-              style={{
-                border: '1px solid white',
-                margin: '10px',
-                padding: '10px',
-                color: 'white'
-              }}
-            >
-              <div
+            <ListBox key={post.id}>
+              <ListBoxContents
                 onClick={() => {
                   const selectPost = posts?.find((item) => post.id === item.id);
                   setOpen(true);
@@ -107,12 +99,14 @@ const Community = () => {
                   }
                 }}
               >
-                <div>{post.userConcern}</div>
-                <div>{post.matchedAdvice.message}</div>
+                <ListBoxUserConcern>{post.userConcern}</ListBoxUserConcern>
+                <br />
+                <ListBoxMessege>{post.matchedAdvice.message}</ListBoxMessege>
+                <br />
                 <div>
                   {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
                 </div>
-              </div>
+              </ListBoxContents>
               <div>
                 {post?.uid === user?.uid ? (
                   <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
@@ -120,10 +114,12 @@ const Community = () => {
                   ''
                 )}
               </div>
-            </div>
+            </ListBox>
+
+            // </div>
           );
         })}
-      </div>
+      </ListContainer>
       <React.Fragment>
         <Modal
           aria-labelledby="modal-title"
@@ -248,17 +244,16 @@ const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   width: 50%;
   height: 100%;
   margin: 0 auto;
 
   font-size: 18px;
-  text-align: center;
   color: #333;
 
   & > div > div {
-    margin: 0 auto;
     padding-bottom: 10px;
   }
 
@@ -351,31 +346,32 @@ const MainTitle = styled.h3`
   font-size: 32px;
   text-align: center;
 `;
-
-// const ListBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   box-sizing: border-box;
-//   height: 200px;
-//   max-height: 200px;
-//   padding: 5px 30px 10px;
-//   border-radius: 10px;
-//   background: center / cover no-repeat url(${ListBackgroundImg});
-//   cursor: pointer;
-
-//   & > p {
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     display: -webkit-box;
-//     -webkit-line-clamp: 6;
-//     -webkit-box-orient: vertical;
-
-//     font-size: 18px;
-//     font-weight: 400;
-//     letter-spacing: -0.5px;
-//     line-height: 1.4;
-
-//     color: #333;
-//   }
-// `;
+const ListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+`;
+const ListBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 200px;
+  max-height: 200px;
+  padding: 5px 50px 10px;
+  border-radius: 10px;
+  background: center / cover no-repeat url(${ListBackgroundImg});
+  cursor: pointer;
+`;
+const ListBoxContents = styled.div`
+  width: 360px;
+  text-align: center;
+`;
+const ListBoxUserConcern = styled.div`
+  font-weight: 350;
+`;
+const ListBoxMessege = styled.div`
+  font-weight: 650;
+`;

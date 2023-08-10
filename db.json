@@ -11,7 +11,7 @@
       },
       "saved": false,
       "liked": {
-        "cheer": 123123123,
+        "cheer": 123123124,
         "sad": 123123222,
         "empathy": 223234344
       }
@@ -25,9 +25,9 @@
         "authorProfile": "작가",
         "message": "사람들은 할 말이 없으면 욕을 한다."
       },
-      "saved": true,
+      "saved": false,
       "liked": {
-        "cheer": 1231,
+        "cheer": 1232,
         "sad": 12312,
         "empathy": 2234
       }
@@ -41,7 +41,7 @@
         "authorProfile": "철학자",
         "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
       },
-      "saved": true,
+      "saved": false,
       "liked": {
         "cheer": 1231,
         "sad": 12312,
@@ -73,7 +73,7 @@
         "authorProfile": "철학자",
         "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
       },
-      "saved": true,
+      "saved": false,
       "liked": {
         "cheer": 0,
         "sad": 0,
@@ -88,6 +88,22 @@
         "author": "프리드리히 니체",
         "authorProfile": "철학자",
         "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
+      },
+      "saved": false,
+      "liked": {
+        "cheer": 1,
+        "sad": 1,
+        "empathy": 1
+      }
+    },
+    {
+      "uid": "JmYpPzMcB5OIyvsaojWy2ctAzVv1",
+      "id": 8,
+      "userConcern": "ype and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "matchedAdvice": {
+        "author": "헬렌 켈러",
+        "authorProfile": "인문계 학사를 받은 최초의 시청각 장애인",
+        "message": "나는 폭풍이 두렵지 않다. 나는 배로 항해 하는 법을 배우고 있으니까."
       },
       "saved": false,
       "liked": {
