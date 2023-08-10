@@ -133,8 +133,8 @@ const StyleToolbar = styled(Toolbar)`
   & > div:nth-child(2) > button > p {
     margin: 0;
     line-height: 64.43px;
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 28px;
+    font-weight: 600;
     text-align: center;
   }
 
