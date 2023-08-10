@@ -1,71 +1,55 @@
-# Getting Started with Create React App
+# 고민해결책 Resolve-Book
+## 📓 프로젝트 소개
+고민을 작성하면 조언을 명언으로 제공 받을 수 있는 사이트 입니다. 커뮤니티 페이지에서는 본인의 고민 뿐만 아니라, 타인의 고민과 그에 대한 해결책(조언)을 보고 공감할 수 있습니다. 또한 마이페이지에서 자신의 고민을 모아볼 수 있으며, 타인의 고민글 중 마음에 드는 글을 보관하여 추후에 다시 볼 수 있습니다. ‘고민 사이트’의 취지에 맞게 모든 글은 익명으로 보관, 관리됩니다.
+<br>
+<br>
+(미리보기 영상 업로드 예정)
+<br>
+<br>
+## ⏱️ 개발 기간
+23.08.07 - 23.08.14
+<br>
+<br>
+## 🗝️ 주요 기능
+- 
+- **로그인/회원가입**: firebase에서 제공하는 이메일 방식과 간편로그인(구글, 깃허브, 페이스북) 연동
+- **고민작성**:
+- **조언(명언) 랜덤**: 
+- **글보관함**: 
+- **공감하기**:
+- **북마크**:
+- **커뮤니티**:
+- **무한스크롤**:  
+<br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🤼‍♀️ 멤버 구성
+- 팀장 조유이 : 
+- 팀원 손형정 : 
+- 팀원 이소율 : 
+- 팀원 최수아 : 
+<br>
 
-## Available Scripts
+## ⚙️ 기술 스택
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">  <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"> <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">   <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled components&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<br>
+<br>
 
-In the project directory, you can run:
+## 🎬 데모 영상
+(영상 업로드 예정)
+<br>
+<br>
 
-### `yarn start`
+## 🥊 트러블 슈팅
+#### 여기에 에러 및 이슈 적기 1 
+- 현상: 
+- 원인: 
+- 해결책: 
+#### 여기에 에러 및 이슈 적기 2
+- 현상: 
+- 원인: 
+- 해결책: 
+#### 여기에 에러 및 이슈 적기 3
+- 현상: 
+- 원인: 
+- 해결책: 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# resolve-book
