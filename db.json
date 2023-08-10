@@ -27,7 +27,7 @@
       },
       "saved": false,
       "liked": {
-        "cheer": 1231,
+        "cheer": 1232,
         "sad": 12312,
         "empathy": 2234
       }
@@ -89,7 +89,7 @@
         "authorProfile": "철학자",
         "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
       },
-      "saved": true,
+      "saved": false,
       "liked": {
         "cheer": 1,
         "sad": 1,
@@ -104,6 +104,22 @@
         "author": "일론 머스크",
         "authorProfile": "스페이스X 창업자, 테슬라 CEO",
         "message": "정말 중요한 일이라면 역경이 닥쳐도 그 일을 계속해야 합니다."
+      },
+      "saved": false,
+      "liked": {
+        "cheer": 0,
+        "sad": 0,
+        "empathy": 0
+      }
+    },
+    {
+      "uid": "JmYpPzMcB5OIyvsaojWy2ctAzVv1",
+      "id": 9,
+      "userConcern": "dkfejdklajg",
+      "matchedAdvice": {
+        "author": "풀러",
+        "authorProfile": "학자",
+        "message": "일이 불가능하다고 믿는 것은 일을 불가능하게 하는 일이다."
       },
       "saved": false,
       "liked": {

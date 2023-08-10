@@ -7,36 +7,37 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
-
 import { useAtom, useAtomValue } from 'jotai';
 import { menuTitleAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const Community = () => {
+  // -user정보 받아오기-
   const user = useAtomValue(userAtom);
-
+  // -모달 열고닫기-
   const [open, setOpen] = React.useState(false);
 
   const [, setMenuTitle] = useAtom(menuTitleAtom);
+  // -선택한 모달 상태-
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
-  // jotai로 selectedPost관리
+  // -post 받아오기-
   const [posts, setPosts] = useState();
-
+  // -서버에서 post데이터받아오기-
   const fetchPosts = async () => {
     const { data } = await axios.get('http://localhost:4000/test');
-    setPosts(data);
+    setPosts(data); // 데이터를 posts에 넣기
   };
-
+  // -삭제 버튼 클릭 핸들러-
   const onDeleteButtonClickHandler = async (postId) => {
     try {
       await axios.delete(`http://localhost:4000/test/${postId}`);
       fetchPosts(); // 다시 패치
       setOpen(false); // 모달 닫기
-      setSelectedPost(null);
+      setSelectedPost(null); // 선택된 게시글 초기화
     } catch (error) {
       console.error('Error deleting post:', error);
     }
   };
-
+  // -공감버튼 부분 -
   const likedCounter = async (post, emotion) => {
     try {
       const updatedLiked = {
@@ -56,7 +57,7 @@ const Community = () => {
       alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
     }
   };
-
+  // -북마크 기능 핸들러-
   const changeSavedHandler = async (post) => {
     try {
       const updatedPost = {
@@ -97,38 +98,34 @@ const Community = () => {
       <div>
         {posts?.map((post) => {
           return (
-            <div
-              key={post.id}
-              style={{
-                border: '1px solid white',
-                margin: '10px',
-                padding: '10px',
-                color: 'white'
-              }}
-            >
-              <div
-                onClick={() => {
-                  const selectPost = posts?.find((item) => post.id === item.id);
-                  setOpen(true);
-                  if (selectPost) {
-                    setSelectedPost(selectPost);
-                  }
-                }}
-              >
-                <div>{post.userConcern}</div>
-                <div>{post.matchedAdvice.message}</div>
-                <div>
-                  {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
+            <ListContainer key={post.id}>
+              <ListBox>
+                <div
+                  onClick={() => {
+                    const selectPost = posts?.find((item) => post.id === item.id);
+                    setOpen(true);
+                    if (selectPost) {
+                      setSelectedPost(selectPost);
+                    }
+                  }}
+                >
+                  <div>{post.userConcern}</div>
+                  <div>{post.matchedAdvice.message}</div>
+                  <div>
+                    {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
+                  </div>
                 </div>
-              </div>
-              <div>
-                {post?.uid === user?.uid ? (
-                  <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
-                ) : (
-                  ''
-                )}
-              </div>
-            </div>
+                <div>
+                  {post?.uid === user?.uid ? (
+                    <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </ListBox>
+            </ListContainer>
+
+            // </div>
           );
         })}
       </div>
@@ -264,33 +261,6 @@ const ContentsBox = styled.div`
   font-size: 18px;
   text-align: center;
   color: #333;
-
-  & > div > div {
-    margin: 0 auto;
-    padding-bottom: 10px;
-  }
-
-  & > div > div:last-of-type {
-    padding-bottom: 0px;
-  }
-
-  & p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    word-break: keep-all;
-
-    letter-spacing: -0.5px;
-    line-height: 1.4;
-  }
-
-  & div > span {
-    font-size: 20px;
-    font-weight: 600;
-    font-style: italic;
-  }
 `;
 
 const DeleteButton = styled.button`
@@ -354,30 +324,24 @@ const StyleModalClose = styled(ModalClose)`
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
 `;
 
-// const ListBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   box-sizing: border-box;
-//   height: 200px;
-//   max-height: 200px;
-//   padding: 5px 30px 10px;
-//   border-radius: 10px;
-//   background: center / cover no-repeat url(${ListBackgroundImg});
-//   cursor: pointer;
+const ListBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 200px;
+  margin-bottom: 20px;
+  max-height: 200px;
+  padding: 5px 30px 10px;
+  border-radius: 10px;
+  background: center / cover no-repeat url(${ListBackgroundImg});
+  cursor: pointer;
+`;
 
-//   & > p {
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     display: -webkit-box;
-//     -webkit-line-clamp: 6;
-//     -webkit-box-orient: vertical;
-
-//     font-size: 18px;
-//     font-weight: 400;
-//     letter-spacing: -0.5px;
-//     line-height: 1.4;
-
-//     color: #333;
-//   }
-// `;
+const ListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+`;
