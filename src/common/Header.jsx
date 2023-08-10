@@ -37,7 +37,14 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#000' }}>
         <Toolbar>
-          <Button style={{ color: 'white' }}>커뮤니티</Button>
+          <Button
+            onClick={() => {
+              navigate('/community');
+            }}
+            style={{ color: 'white' }}
+          >
+            커뮤니티
+          </Button>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             {!user ? (
