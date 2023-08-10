@@ -95,40 +95,40 @@ const Community = () => {
       >
         community 고민의 장
       </h1>
-      <div>
+      <ListContainer>
         {posts?.map((post) => {
           return (
-            <ListContainer key={post.id}>
-              <ListBox>
-                <div
-                  onClick={() => {
-                    const selectPost = posts?.find((item) => post.id === item.id);
-                    setOpen(true);
-                    if (selectPost) {
-                      setSelectedPost(selectPost);
-                    }
-                  }}
-                >
-                  <div>{post.userConcern}</div>
-                  <div>{post.matchedAdvice.message}</div>
-                  <div>
-                    {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
-                  </div>
-                </div>
+            <ListBox key={post.id}>
+              <ListBoxContents
+                onClick={() => {
+                  const selectPost = posts?.find((item) => post.id === item.id);
+                  setOpen(true);
+                  if (selectPost) {
+                    setSelectedPost(selectPost);
+                  }
+                }}
+              >
+                <ListBoxUserConcern>{post.userConcern}</ListBoxUserConcern>
+                <br />
+                <ListBoxMessege>{post.matchedAdvice.message}</ListBoxMessege>
+                <br />
                 <div>
-                  {post?.uid === user?.uid ? (
-                    <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
-                  ) : (
-                    ''
-                  )}
+                  {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
                 </div>
-              </ListBox>
-            </ListContainer>
+              </ListBoxContents>
+              <div>
+                {post?.uid === user?.uid ? (
+                  <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
+                ) : (
+                  ''
+                )}
+              </div>
+            </ListBox>
 
             // </div>
           );
         })}
-      </div>
+      </ListContainer>
       <React.Fragment>
         <Modal
           aria-labelledby="modal-title"
@@ -253,14 +253,40 @@ const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   width: 50%;
   height: 100%;
   margin: 0 auto;
 
   font-size: 18px;
-  text-align: center;
   color: #333;
+
+  & > div > div {
+    padding-bottom: 10px;
+  }
+
+  & > div > div:last-of-type {
+    padding-bottom: 0px;
+  }
+
+  & p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
+
+    letter-spacing: -0.5px;
+    line-height: 1.4;
+  }
+
+  & div > span {
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+  }
 `;
 
 const DeleteButton = styled.button`
@@ -323,25 +349,32 @@ const StyleModalClose = styled(ModalClose)`
   position: absolute;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
 `;
-
+const ListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+`;
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   box-sizing: border-box;
   height: 200px;
-  margin-bottom: 20px;
   max-height: 200px;
-  padding: 5px 30px 10px;
+  padding: 5px 50px 10px;
   border-radius: 10px;
   background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
 `;
-
-const ListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
-  gap: 30px;
-  width: 100%;
-  height: 100%;
+const ListBoxContents = styled.div`
+  width: 360px;
+  text-align: center;
+`;
+const ListBoxUserConcern = styled.div`
+  font-weight: 350;
+`;
+const ListBoxMessege = styled.div`
+  font-weight: 650;
 `;
