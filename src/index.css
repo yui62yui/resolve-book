@@ -9,6 +9,7 @@ p,
 input {
   /* font-family: 'Noto Serif KR', sans-serif; */
   font-family: 'IBM Plex Sans KR', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
