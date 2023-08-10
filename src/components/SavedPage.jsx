@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../common/Card';
 import ListBackgroundImg from '../assets/images/list-bg.png';
+import { useAtom } from 'jotai';
+import { selectedPostAtom } from '../atoms/userAtom';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
-  const [selectedData, setSelectedData] = useState();
+  const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -14,16 +16,20 @@ const SavedPage = () => {
       setData(data);
     };
     fetchPosts();
+  }, [selectedPost]);
+
+  useEffect(() => {
+    setSelectedPost(null);
   }, []);
 
   const showPostHandler = (post) => {
-    setSelectedData(post);
+    setSelectedPost(post);
   };
 
   return (
     <Container>
       <LeftContainer>
-        <Card selectedData={selectedData} />
+        <Card />
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {

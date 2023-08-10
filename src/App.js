@@ -20,7 +20,6 @@ const App = () => {
     return () => unsubscribe();
     // setUser 함수가 업데이트될 때만 이펙트가 실행됨
   }, [setUser]);
-
   return <Router />;
 };
 

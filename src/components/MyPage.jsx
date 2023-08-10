@@ -5,48 +5,62 @@ import Card from '../common/Card';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
-import { useAtomValue } from 'jotai';
-import { userAtom } from '../atoms/userAtom';
+
+import { useAtom, useAtomValue } from 'jotai';
+import { selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const MyPage = () => {
   const [data, setData] = useState([]);
-  const [selectedData, setSelectedData] = useState();
+  const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
   const user = useAtomValue(userAtom);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get('http://localhost:4000/test');
-      setData(data);
-    };
-    fetchPosts();
-  }, []);
-
-  const showPostHandler = async (post) => {
-    await setSelectedData(post);
+  const fetchPosts = async () => {
+    const { data } = await axios.get('http://localhost:4000/test');
+    setData(data);
   };
 
-  const deletePostHandler = (post) => {
+  useEffect(() => {
+    fetchPosts();
+  }, [selectedPost]);
+
+  useEffect(() => {
+    setSelectedPost(null);
+  }, []);
+
+  const showPostHandler = (post) => {
+    setSelectedPost(post);
+  };
+
+  const deletePostHandler = async (id) => {
     alert('정말 삭제하시겠습니까?');
+    try {
+      await axios.delete(`http://localhost:4000/test/${id}`);
+      fetchPosts();
+      setSelectedPost(null);
+    } catch (error) {
+      alert('에러발생');
+    }
   };
 
   return (
     <Container>
       <LeftContainer>
-        {/* 이쪽에 선택된 데이터를 기반으로 정보를 보여 주면 됨 */}
-        <Card selectedData={selectedData} />
+        <Card />
       </LeftContainer>
       <RightContainer>
-        {data.map((post) => {
-          if (post.uid === user.uid) {
+        {data?.map((post) => {
+          if (post?.uid === user?.uid) {
             return (
-              <ListBox
-                key={post.id}
-                onClick={() => {
-                  showPostHandler(post);
-                }}
-              >
-                <p>{post.userConcern}</p>
+              <ListBoxContainer key={post.id}>
+                <ListBox
+                  key={post.id}
+                  onClick={() => {
+                    showPostHandler(post);
+                  }}
+                >
+                  <p>{post?.userConcern}</p>
+                </ListBox>
                 <Button
                   variant="contained"
                   sx={{
@@ -55,14 +69,16 @@ const MyPage = () => {
                     ':hover': { backgroundColor: '#666' }
                   }}
                   onClick={() => {
-                    deletePostHandler(post);
+                    deletePostHandler(post.id);
                   }}
                 >
                   <DeleteIcon sx={{ fontSize: '18px', marginRight: '5px' }} />
                   <span>삭제</span>
                 </Button>
-              </ListBox>
+              </ListBoxContainer>
             );
+          } else {
+            return null;
           }
         })}
       </RightContainer>
@@ -92,6 +108,20 @@ const RightContainer = styled.div`
   height: 100%;
 `;
 
+const ListBoxContainer = styled.div`
+  position: relative;
+
+  & > button {
+    position: absolute;
+    bottom: 20px;
+    left: 0px;
+    right: 0px;
+    margin: 0 auto;
+    width: 100px;
+    height: 40px;
+  }
+`;
+
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -117,11 +147,5 @@ const ListBox = styled.div`
     line-height: 1.4;
 
     color: #333;
-  }
-
-  & > button {
-    margin: 0 auto;
-    width: 100px;
-    height: 40px;
   }
 `;
