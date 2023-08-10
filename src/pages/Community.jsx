@@ -16,7 +16,7 @@ const Community = () => {
 
   const [open, setOpen] = React.useState(false);
 
-  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
+  const [, setMenuTitle] = useAtom(menuTitleAtom);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
   // jotai로 selectedPost관리
   const [posts, setPosts] = useState();
