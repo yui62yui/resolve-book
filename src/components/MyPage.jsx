@@ -58,14 +58,14 @@ const MyPage = () => {
                   }}
                 >
                   <p>{post?.userConcern}</p>
+                  <DeleteButton
+                    onClick={() => {
+                      deletePostHandler(post.id);
+                    }}
+                  >
+                    <span>삭제</span>
+                  </DeleteButton>
                 </ListBox>
-                <DeleteButton
-                  onClick={() => {
-                    deletePostHandler(post.id);
-                  }}
-                >
-                  <span>삭제</span>
-                </DeleteButton>
               </ListBoxContainer>
             );
           } else {
