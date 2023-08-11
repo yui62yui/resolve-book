@@ -1,5 +1,3 @@
-
-
 import { atom } from 'jotai';
 
 export const userAtom = atom(null); // 사용자 정보를 담을 Atom
@@ -8,3 +6,4 @@ export const menuTitleAtom = atom(null);
 export const postAtom = atom('', (get, set, newValue) => {
   set(postAtom, newValue);
 });
+export const bookmarkedPostAtom = atom(null);
