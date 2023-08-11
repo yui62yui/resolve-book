@@ -122,9 +122,9 @@ const Card = (data) => {
             }}
           >
             {selectedPost?.saved ? (
-              <BookmarkIcon sx={{ fontSize: '80px', color: '#a32626' }} />
+              <BookmarkIcon sx={{ fontSize: '80px', color: '#46380e' }} />
             ) : (
-              <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#a32626' }} />
+              <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#46380e' }} />
             )}
           </div>
         ) : null}
