@@ -4,15 +4,13 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { useAtom } from 'jotai';
-import { selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { bookmarkedPostAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
-
+  const [bookmarkedPost, setBookmarkedPost] = useAtom(bookmarkedPostAtom);
   const [user, setUser] = useAtom(userAtom);
-
-  const myUid = user?.uid;
 
   const fetchPosts = async () => {
     const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/test`);
@@ -37,22 +35,18 @@ const SavedPage = () => {
         <Card />
       </LeftContainer>
       <RightContainer>
-        {data.map((post) => {
-          const postUid = post?.userSaved?.uid;
-          const myUid = user?.uid;
-          return postUid === myUid && post?.userSaved?.saved ? (
+        {data
+          .filter((post) => bookmarkedPost.some((bp) => bp.postId === post.id && bp.uid === user.uid))
+          .map((filteredPost) => (
             <ListBox
-              key={post.id}
+              key={filteredPost.id}
               onClick={() => {
-                showPostHandler(post);
+                showPostHandler(filteredPost);
               }}
             >
-              <p>{post.userConcern}</p>
+              <p>{filteredPost.userConcern}</p>
             </ListBox>
-          ) : (
-            ''
-          );
-        })}
+          ))}
       </RightContainer>
     </Container>
   );

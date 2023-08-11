@@ -8,7 +8,8 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
 import { useAtom, useAtomValue } from 'jotai';
-import { selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { bookmarkedPostAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { nanoid } from 'nanoid';
 
 const Community = () => {
   // -user정보 받아오기-
@@ -17,6 +18,8 @@ const Community = () => {
   const [open, setOpen] = React.useState(false);
   // -선택한 모달 상태-
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
+  // - 현재의 북마크한 포스트 리스트-
+  const [bookmarkedPost, setBookmarkedPost] = useAtom(bookmarkedPostAtom);
   // -post 받아오기-
   const [posts, setPosts] = useState();
   // -서버에서 post데이터받아오기-
@@ -24,6 +27,11 @@ const Community = () => {
     const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/test`);
     setPosts(data); // 데이터를 posts에 넣기
   };
+  const bookmarkedPostHandler = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bp`);
+    setBookmarkedPost(data);
+  };
+
   // -삭제 버튼 클릭 핸들러-
   const onDeleteButtonClickHandler = async (postId) => {
     try {
@@ -56,30 +64,32 @@ const Community = () => {
     }
   };
   // -북마크 기능 핸들러-
-  const changeSavedHandler = async (post) => {
+  const savePostHandler = async (post) => {
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/bp`, {
+      id: nanoid(),
+      uid: user.uid,
+      postId: post.id,
+      userConcern: post.userConcern
+    });
+    alert('북마크 설정 완료');
+    bookmarkedPostHandler();
+  };
+
+  const deletePostHandler = async (selectedPost) => {
+    alert('정말 삭제하시겠습니까?');
     try {
-      const updatedPost = {
-        ...post,
-        userSaved: {
-          uid: user?.uid,
-          saved: !post.userSaved?.saved
-        }
-      };
-
-      await axios.put(`${process.env.REACT_APP_SERVER_URL}/test/${post.id}`, updatedPost);
-
-      setSelectedPost(updatedPost);
-
-      post?.userSaved.saved
-        ? alert('북마크 설정이 해제되었습니다.')
-        : alert('북마크가 설정되었습니다. 보관하신 글은 내 보관함 - 보관한 글 모아보기에서 확인 가능합니다.');
+      const wantedPost = await bookmarkedPost.find((bp) => user.uid === bp.uid && selectedPost.id === bp.postId);
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/bp/${wantedPost.id}`);
+      alert('북마크 해제 완료');
+      bookmarkedPostHandler();
     } catch (error) {
-      alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+      alert('에러발생');
     }
   };
 
   useEffect(() => {
     fetchPosts();
+    bookmarkedPostHandler();
   }, [selectedPost]);
 
   useEffect(() => {
@@ -196,16 +206,21 @@ const Community = () => {
               </ContentsBox>
               <BookMarkContainer>
                 {!!selectedPost?.uid === true && selectedPost?.uid !== user.uid ? (
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      changeSavedHandler(selectedPost);
-                    }}
-                  >
-                    {selectedPost?.userSaved?.uid === user?.uid && selectedPost?.userSaved?.saved ? (
-                      <BookmarkIcon sx={{ fontSize: '80px', color: '#46380e' }} />
+                  <div>
+                    {bookmarkedPost?.find((bp) => bp?.uid === user.uid && bp?.postId === selectedPost?.id) ? (
+                      <BookmarkIcon
+                        onClick={() => {
+                          deletePostHandler(selectedPost);
+                        }}
+                        sx={{ fontSize: '80px', color: '#46380e' }}
+                      />
                     ) : (
-                      <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#46380e' }} />
+                      <BookmarkBorderOutlinedIcon
+                        onClick={() => {
+                          savePostHandler(selectedPost);
+                        }}
+                        sx={{ fontSize: '80px', color: '#46380e' }}
+                      />
                     )}
                   </div>
                 ) : null}
