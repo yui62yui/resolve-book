@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { useAtom, useAtomValue } from 'jotai';
 import { postAtom, userAtom } from '../atoms/userAtom';
-import { Button, Input } from '@mui/material';
+import { Input } from '@mui/material';
 
 import axios from 'axios';
 import page1Img from '../assets/images/main_cover.png';
@@ -13,12 +13,9 @@ import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
 import { kadvice } from 'kadvice';
 import { FormGroup } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
 
 const Post = (props) => {
   // useRef를 사용하여 HTMLFlipBook
-  const navigate = useNavigate();
-
   const [, setFlipEnabled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [userConcern, setUserConcern] = useAtom(postAtom);
@@ -37,17 +34,6 @@ const Post = (props) => {
     }
   };
 
-  const formattedTimestamp = new Date().toLocaleString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  });
-
-  // "연도, 월, 일 : 2023. 08. 10" 형식으로 변환
-  const parts = formattedTimestamp.split('.').map((part) => part.trim());
-  const formattedResult = parts.slice(0, 3).join('.');
-
-  // 고민 등록 및 데이터 전송 처리
   const handleShowRandomAdvice = async (event) => {
     event.preventDefault();
 
@@ -137,6 +123,7 @@ const Post = (props) => {
       setFlipEnabled(false);
       setSubmitted(false);
       setUserConcern('');
+      setRemainingCharacters(50);
     }, 480);
     if (flipBookRef.current) {
       flipBookRef.current.pageFlip().flipPrev();
@@ -153,22 +140,20 @@ const Post = (props) => {
               {/* 고민 등록 폼 */}
               {!submitted && (
                 <StyledFormGroup>
-                  <StyledH2>고민을 말해주세요</StyledH2>
+                  <StyledH2>고민을 말해보세요...</StyledH2>
                   <StyledCustomInput
                     value={userConcern}
                     onChange={handleTextareaChange}
-                    placeholder="고민을 작성하세요"
+                    placeholder="50자 이내로 작성하세요."
                     maxLength={50}
                     onKeyPress={handleKeyPress}
                   />
                   <RemainingCharacters>{remainingCharacters}자 남음</RemainingCharacters>
-                  <Button onClick={handleShowRandomAdvice} style={{ marginTop: '10px' }}>
-                    등록하기
-                  </Button>
+                  <StyledRegistButton onClick={handleShowRandomAdvice}>등록하기</StyledRegistButton>
                 </StyledFormGroup>
               )}
 
-              <StyledFlipBook ref={flipBookRef} width={400} height={500} disableFlipByClick useMouseEvents={false}>
+              <StyledFlipBook ref={flipBookRef} width={450} height={550} disableFlipByClick useMouseEvents={false}>
                 <Page>
                   <PageContent>
                     <PageText></PageText>
@@ -177,7 +162,11 @@ const Post = (props) => {
                 </Page>
                 <Page>
                   <PageContent>
-                    <PageText2>고민해결책</PageText2>
+                    <PageText2>
+                      고민이 있나요?
+                      <br />
+                      고민을 입력하면 명언을 바탕으로 진심을 담아 조언해드립니다.
+                    </PageText2>
                     <StyledImage src={page2Img} alt="Page 2" />
                   </PageContent>
                 </Page>
@@ -185,7 +174,6 @@ const Post = (props) => {
                   <PageContent>
                     <PageText3>
                       <StyledSubmittedConcern>{submittedConcern}</StyledSubmittedConcern>
-                      <StyledFormattedResult>{formattedResult}</StyledFormattedResult>
                     </PageText3>
                     <StyledImage src={page3Img} alt="Page 3" />
                   </PageContent>
@@ -197,8 +185,9 @@ const Post = (props) => {
                       {randomAdvice && (
                         <>
                           <StyledParagraph>{randomAdvice.message}</StyledParagraph>
-                          <StyledParagraph>{randomAdvice.author}</StyledParagraph>
-                          <StyledParagraph>{randomAdvice.authorProfile}</StyledParagraph>
+                          <StyledParagraph2>
+                            - {randomAdvice.author} / {randomAdvice.authorProfile} -
+                          </StyledParagraph2>
                         </>
                       )}
                     </PageText4>
@@ -223,7 +212,9 @@ const Post = (props) => {
 
 export default Post;
 
-const BackgroundContainer = styled.div``;
+const BackgroundContainer = styled.div`
+  padding-top: 50px;
+`;
 
 const StyledContainer = styled.div`
   display: flex;
@@ -234,15 +225,15 @@ const StyledContainer = styled.div`
 const StyledMaxWidthContainer = styled.div`
   margin: 0 auto;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   overflow: hidden;
 `;
 
 const StyledFormGroup = styled(FormGroup)`
   position: absolute;
   z-index: 1;
-  transform: translate(50%, 105%);
-  width: 200px;
+  transform: translate(38%, 100%);
+  width: 250px;
   text-align: center;
 `;
 
@@ -253,8 +244,12 @@ const StyledH2 = styled.h2`
 const StyledCustomInput = styled(Input)`
   position: relative;
   &:before {
+    border-bottom: none !important;
+  }
+  &:after {
     border-bottom: none;
   }
+
   width: 100%;
   color: #fff;
 
@@ -264,12 +259,19 @@ const StyledCustomInput = styled(Input)`
 
   input {
     color: #fff;
+    border-bottom: 1px solid #fff !important;
+    &:after {
+      border-bottom: none;
+    }
+  }
+  &:after {
+    border-bottom: none !important;
   }
 `;
 
 const RemainingCharacters = styled.div`
   color: #fff;
-  font-size: 12px;
+  font-size: 10px;
   text-align: right;
 `;
 
@@ -303,24 +305,29 @@ const PageText2 = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-80%, -50%);
+  text-align: center;
+  transform: translate(-62%, -61%);
+  font-style: italic;
+  line-height: 27px;
+  color: #4d4323;
 `;
 
 const PageText3 = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-40%, -50%);
+  transform: translate(-40%, -53%);
   text-align: center;
   width: 50%;
 
   h3 {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: normal;
     white-space: pre-wrap;
     width: 100%;
     letter-spacing: -0.5px;
     line-height: 1.4;
+    color: #4d4323;
     overflow-wrap: break-word;
   }
 `;
@@ -329,11 +336,12 @@ const PageText4 = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-62%, -50%);
+  transform: translate(-61%, -56%);
   text-align: center;
+  color: #4d4323;
 
   h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: normal;
     white-space: pre-wrap;
     width: 100%;
@@ -348,16 +356,23 @@ const StyledH3 = styled.h3`
   font-size: 20px;
   text-align: center;
   font-weight: 600;
-  font-style: italic;
 `;
 
 const StyledParagraph = styled.p`
+  font-style: italic;
+  text-align: center;
+  font-weight: 600;
+  color: #4d4323;
+`;
+
+const StyledParagraph2 = styled.p`
+  font-size: 12px;
   text-align: center;
 `;
 
 const StyledImage = styled.img`
-  width: 400px;
-  height: 500px;
+  width: 450px;
+  height: 550px;
 `;
 
 const StyledSubmittedConcern = styled.h3`
@@ -370,8 +385,6 @@ const StyledSubmittedConcern = styled.h3`
   overflow-wrap: break-word;
 `;
 
-const StyledFormattedResult = styled.p``;
-
 const StyledLinkContainer = styled.div`
   position: absolute;
   z-index: 1;
@@ -381,17 +394,40 @@ const StyledLinkContainer = styled.div`
   transition: transform 0.3s ease-in-out;
 `;
 
-const StyledLinkButton = styled(Button)`
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: underline;
-  border: none;
-  border-radius: 4px;
+const StyledRegistButton = styled.button`
+  margin: 15px auto;
+  padding: 0 20px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 26px;
+  border-radius: 20px;
+  border: 2px solid #9e9e9e;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px #686868;
+  transition: 0.3s;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  color: #666;
   &:hover {
-    transform: scale(1.1);
+    background-color: #9e9e9e;
+  }
+`;
+
+const StyledLinkButton = styled.div`
+  margin: 25px auto 0;
+  padding: 0 20px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 26px;
+  border-radius: 20px;
+  border: 2px solid #9e9e9e;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px #686868;
+  transition: 0.3s;
+  cursor: pointer;
+  color: #666;
+  &:hover {
+    background-color: #9e9e9e;
   }
 `;
