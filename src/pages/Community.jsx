@@ -194,8 +194,8 @@ const Community = () => {
               <BookMarkContainer>
                 {!!selectedPost?.uid === true && selectedPost?.uid !== user.uid ? (
                   <div
-                    onClick={(event) => {
-                      event.stopPropagation();
+                    onClick={(e) => {
+                      e.stopPropagation();
                       changeSavedHandler(selectedPost);
                     }}
                   >

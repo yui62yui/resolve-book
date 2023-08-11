@@ -30,17 +30,17 @@ const Saved = () => {
       <Stack direction="row" spacing={5} sx={{ display: 'block', margin: '0px auto 50px' }}>
         <PageButton
           className="myButton"
-          onClick={(event) => {
+          onClick={(e) => {
             setMyButton(true);
-            buttonActiveHandler(event);
+            buttonActiveHandler(e);
           }}
         >
           나의 글 모아보기
         </PageButton>
         <PageButton
-          onClick={(event) => {
+          onClick={(e) => {
             setMyButton(false);
-            buttonActiveHandler(event);
+            buttonActiveHandler(e);
           }}
         >
           보관한 글 모아보기

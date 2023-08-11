@@ -95,18 +95,6 @@ const RightContainer = styled.div`
   }
 `;
 
-const ListBoxContainer = styled.div`
-  position: relative;
-
-  & > button {
-    position: absolute;
-    bottom: 20px;
-    left: 0px;
-    right: 0px;
-    margin: 0 auto;
-  }
-`;
-
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;

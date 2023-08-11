@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Card from '../common/Card';
-import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 
 import { useAtom, useAtomValue } from 'jotai';
