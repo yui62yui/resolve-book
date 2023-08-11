@@ -77,7 +77,7 @@ const Post = (props) => {
       }
 
       // 서버로 데이터 전송
-      await axios.post('http://localhost:4000/test', {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/test`, {
         uid: user.uid,
         id: '',
         userConcern: trimmedUserConcern,

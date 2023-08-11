@@ -14,7 +14,7 @@ const MyPage = () => {
   const user = useAtomValue(userAtom);
 
   const fetchPosts = async () => {
-    const { data } = await axios.get('http://localhost:4000/test');
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/test`);
     setData(data);
   };
 
@@ -33,7 +33,7 @@ const MyPage = () => {
   const deletePostHandler = async (id) => {
     alert('정말 삭제하시겠습니까?');
     try {
-      await axios.delete(`http://localhost:4000/test/${id}`);
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/test/${id}`);
       fetchPosts();
       setSelectedPost(null);
     } catch (error) {

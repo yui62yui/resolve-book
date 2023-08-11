@@ -21,13 +21,13 @@ const Community = () => {
   const [posts, setPosts] = useState();
   // -서버에서 post데이터받아오기-
   const fetchPosts = async () => {
-    const { data } = await axios.get('http://localhost:4000/test');
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/test`);
     setPosts(data); // 데이터를 posts에 넣기
   };
   // -삭제 버튼 클릭 핸들러-
   const onDeleteButtonClickHandler = async (postId) => {
     try {
-      await axios.delete(`http://localhost:4000/test/${postId}`);
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/test/${postId}`);
       fetchPosts(); // 다시 패치
       setOpen(false); // 모달 닫기
       setSelectedPost(null); // 선택된 게시글 초기화
@@ -47,7 +47,7 @@ const Community = () => {
         ...post,
         liked: updatedLiked
       };
-      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}/test/${post.id}`, updatedPost);
       setSelectedPost(updatedPost);
 
       alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
@@ -63,7 +63,7 @@ const Community = () => {
         saved: !post.saved
       };
 
-      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}/test/${post.id}`, updatedPost);
 
       setSelectedPost(updatedPost);
 

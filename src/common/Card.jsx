@@ -26,7 +26,7 @@ const Card = (data) => {
         ...post,
         liked: updatedLiked
       };
-      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+      await axios.put(`REACT_APP_API_URL/test/${post.id}`, updatedPost);
       setSelectedPost(updatedPost);
 
       alert('공감 완료! 당신의 따뜻한 마음을 전달했어요!🥰');
@@ -42,7 +42,7 @@ const Card = (data) => {
         saved: !post.saved
       };
 
-      await axios.put(`http://localhost:4000/test/${post.id}`, updatedPost);
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}/test/${post.id}`, updatedPost);
 
       setSelectedPost(updatedPost);
 
