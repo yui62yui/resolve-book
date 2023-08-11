@@ -98,7 +98,7 @@ const SignUp = () => {
     <>
       <MainTitle>회원가입</MainTitle>
       <Container
-        style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '3px' }}
+        style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '3px', borderRadius: '20px' }}
         component="main"
         maxWidth="xs"
       >

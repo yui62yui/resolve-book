@@ -27,7 +27,7 @@ const Saved = () => {
   return (
     <Container>
       <MainTitle>내 보관함</MainTitle>
-      <Stack direction="row" spacing={10} sx={{ display: 'block', margin: '30px auto 100px' }}>
+      <Stack direction="row" spacing={5} sx={{ display: 'block', margin: '0px auto 50px' }}>
         <PageButton
           className="myButton"
           onClick={(event) => {
@@ -86,7 +86,7 @@ const PageButton = styled.button`
 
 const MainTitle = styled.h3`
   color: white;
-  font-size: 32px;
+  font-size: 26px;
+  margin: 0px 0px 32px;
   text-align: center;
-  padding-bottom: 50px;
 `;
