@@ -63,6 +63,7 @@ const Card = () => {
       const wantedPost = await bookmarkedPost.find((bp) => user.uid === bp.uid && selectedPost.id === bp.postId);
       await axios.delete(`${process.env.REACT_APP_SERVER_URL}/bp/${wantedPost.id}`);
       alert('북마크 해제 완료');
+      setSelectedPost(null);
       bookmarkedPostHandler();
     } catch (error) {
       alert('에러발생');
