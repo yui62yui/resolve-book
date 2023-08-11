@@ -34,8 +34,8 @@ const Post = (props) => {
     }
   };
 
-  const handleShowRandomAdvice = async (event) => {
-    event.preventDefault();
+  const handleShowRandomAdvice = async (e) => {
+    e.preventDefault();
 
     const trimmedUserConcern = userConcern.trim(); // trim된 값 할당
 
@@ -100,8 +100,8 @@ const Post = (props) => {
   };
 
   // 고민 내용 변경 처리
-  const handleTextareaChange = (event) => {
-    const inputValue = event.target.value;
+  const handleTextareaChange = (e) => {
+    const inputValue = e.target.value;
     setUserConcern(inputValue);
 
     // 글자 수가 50자를 초과할 경우 경고창 띄우기
