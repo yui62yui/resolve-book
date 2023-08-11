@@ -111,6 +111,38 @@
         "sad": 0,
         "empathy": 0
       }
+    },
+    {
+      "uid": "JmYpPzMcB5OIyvsaojWy2ctAzVv1",
+      "id": 9,
+      "userConcern": "얼미ㅏ널너앎ㅇㄹ",
+      "matchedAdvice": {
+        "author": "덴젤 워싱턴",
+        "authorProfile": "영화 배우",
+        "message": "비가 내리기 바란다면 진흙과도 상대해야한다. 피할 수 없는 것이다."
+      },
+      "saved": false,
+      "liked": {
+        "cheer": 0,
+        "sad": 0,
+        "empathy": 0
+      }
+    },
+    {
+      "uid": "JmYpPzMcB5OIyvsaojWy2ctAzVv1",
+      "id": 10,
+      "userConcern": "hgffdd",
+      "matchedAdvice": {
+        "author": "오프라 윈프리",
+        "authorProfile": "방송인, 흑인 여성 중 가장 성공한 인물 중 한명",
+        "message": "중요한 질문은 '당신이 얼마나 바쁜가?'가 아니다. '당신이 무엇에 바쁜가'가 핵심 질문이다."
+      },
+      "saved": false,
+      "liked": {
+        "cheer": 0,
+        "sad": 0,
+        "empathy": 0
+      }
     }
   ]
 }
