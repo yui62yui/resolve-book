@@ -152,7 +152,7 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span style={{ paddingBottom: '20px' }}>2023.08.08</span>{' '}
+                    <span style={{ paddingBottom: '20px' }}>{selectedPost?.formattedRegistrationDate}</span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
