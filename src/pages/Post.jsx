@@ -18,23 +18,17 @@ import { useNavigate } from 'react-router-dom';
 const Post = (props) => {
   // useRef를 사용하여 HTMLFlipBook
   const navigate = useNavigate();
-  
+
   const [, setFlipEnabled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [userConcern, setUserConcern] = useAtom(postAtom);
-
-  const [, setMenuTitle] = useAtom(menuTitleAtom);
   const [randomAdvice, setRandomAdvice] = useState(null);
   const [remainingCharacters, setRemainingCharacters] = useState(50); // 글자 수 50자 제한
   const [submittedConcern, setSubmittedConcern] = useState(userConcern);
-  
+
   const user = useAtomValue(userAtom);
   // useRef를 사용하여 HTMLFlipBook
   const flipBookRef = useRef(null);
-
-  useEffect(() => {
-    setMenuTitle('고민해결책');
-  }, []);
 
   const handleKeyPress = (e) => {
     if (userConcern.trim().length > 50 && e.key === 'Enter') {
