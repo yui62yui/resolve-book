@@ -7,12 +7,12 @@ import { getAuth, GoogleAuthProvider, GithubAuthProvider, FacebookAuthProvider }
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyBZ_4G7RZ3ESzkLPUHqI5ykMe_FgXSKDRM',
-  authDomain: 'resolve-book-59350.firebaseapp.com',
-  projectId: 'resolve-book-59350',
-  storageBucket: 'resolve-book-59350.appspot.com',
-  messagingSenderId: '486509422091',
-  appId: '1:486509422091:web:ea77e33d4b49a28de2090e'
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGIN_ID,
+  appId: process.env.REACT_APP_ID
 };
 
 // Initialize Firebase
