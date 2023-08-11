@@ -3,18 +3,14 @@ import styled from 'styled-components';
 import MyPage from '../components/MyPage';
 import SavedPage from '../components/SavedPage';
 import Stack from '@mui/material/Stack';
-import { useAtom } from 'jotai';
-import { menuTitleAtom } from '../atoms/userAtom';
 
 const Saved = () => {
   const [myButton, setMyButton] = useState(true);
-  const [menuTitle, setMenuTitle] = useAtom(menuTitleAtom);
 
   useEffect(() => {
     setMyButton(true);
     const btn = document.querySelector('.myButton');
     btn.classList.add(`active`);
-    setMenuTitle('글 보관함');
   }, []);
 
   const buttonActiveHandler = (e) => {
@@ -30,7 +26,8 @@ const Saved = () => {
 
   return (
     <Container>
-      <Stack direction="row" spacing={2} sx={{ display: 'block', margin: '30px auto 100px' }}>
+      <MainTitle>내 보관함</MainTitle>
+      <Stack direction="row" spacing={10} sx={{ display: 'block', margin: '30px auto 100px' }}>
         <PageButton
           className="myButton"
           onClick={(event) => {
@@ -85,4 +82,11 @@ const PageButton = styled.button`
   &.active {
     background-color: #d4cc7c;
   }
+`;
+
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
+  padding-bottom: 50px;
 `;

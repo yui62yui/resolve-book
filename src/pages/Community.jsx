@@ -7,56 +7,35 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { styled } from 'styled-components';
-
 import { useAtom, useAtomValue } from 'jotai';
-import { menuTitleAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const Community = () => {
+  // -user정보 받아오기-
   const user = useAtomValue(userAtom);
-
+  // -모달 열고닫기-
   const [open, setOpen] = React.useState(false);
-
-  const [, setMenuTitle] = useAtom(menuTitleAtom);
+  // -선택한 모달 상태-
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
-  // jotai로 selectedPost관리
+  // -post 받아오기-
   const [posts, setPosts] = useState();
-
+  // -서버에서 post데이터받아오기-
   const fetchPosts = async () => {
-    try {
-      const { data } = await axios.get('http://localhost:4000/test');
-
-      const transformedPosts = data.map((post) => {
-        const formattedDate = new Date(post.registrationDate)
-          .toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-          })
-          .replace(/\./g, ' '); // "."을 " "로 치환하여 형식에 맞게 변환
-
-        return {
-          ...post,
-          formattedRegistrationDate: formattedDate
-        };
-      });
-
-      setPosts(transformedPosts);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
+    const { data } = await axios.get('http://localhost:4000/test');
+    setPosts(data); // 데이터를 posts에 넣기
   };
-
+  // -삭제 버튼 클릭 핸들러-
   const onDeleteButtonClickHandler = async (postId) => {
     try {
       await axios.delete(`http://localhost:4000/test/${postId}`);
       fetchPosts(); // 다시 패치
       setOpen(false); // 모달 닫기
-      setSelectedPost(null);
+      setSelectedPost(null); // 선택된 게시글 초기화
     } catch (error) {
       console.error('Error deleting post:', error);
     }
   };
-
+  // -공감버튼 부분 -
   const likedCounter = async (post, emotion) => {
     try {
       const updatedLiked = {
@@ -76,7 +55,7 @@ const Community = () => {
       alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
     }
   };
-
+  // -북마크 기능 핸들러-
   const changeSavedHandler = async (post) => {
     try {
       const updatedPost = {
@@ -102,31 +81,16 @@ const Community = () => {
 
   useEffect(() => {
     setSelectedPost(null);
-    setMenuTitle('고민의 장');
   }, []);
 
   return (
     <div>
-      <h1
-        style={{
-          color: 'white'
-        }}
-      >
-        community 고민의 장
-      </h1>
-      <div>
+      <MainTitle>커뮤니티 : 고민의 장</MainTitle>
+      <ListContainer>
         {posts?.map((post) => {
           return (
-            <div
-              key={post.id}
-              style={{
-                border: '1px solid white',
-                margin: '10px',
-                padding: '10px',
-                color: 'white'
-              }}
-            >
-              <div
+            <ListBox key={post.id}>
+              <ListBoxContents
                 onClick={() => {
                   const selectPost = posts?.find((item) => post.id === item.id);
                   setOpen(true);
@@ -135,23 +99,25 @@ const Community = () => {
                   }
                 }}
               >
-                <div>{post.userConcern}</div>
-                <div>{post.matchedAdvice.message}</div>
+                <ListPhrasesBox>
+                  <p>{post.userConcern}</p>
+                  <p>{post.matchedAdvice.message}</p>
+                  <p>
+                    {post.matchedAdvice.author} -{post.matchedAdvice.authorProfile}
+                  </p>
+                </ListPhrasesBox>
                 <div>
-                  {post.matchedAdvice.author}&nbsp;-{post.matchedAdvice.authorProfile}
+                  {post?.uid === user?.uid ? (
+                    <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
+                  ) : (
+                    ''
+                  )}
                 </div>
-              </div>
-              <div>
-                {post?.uid === user?.uid ? (
-                  <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
-                ) : (
-                  ''
-                )}
-              </div>
-            </div>
+              </ListBoxContents>
+            </ListBox>
           );
         })}
-      </div>
+      </ListContainer>
       <React.Fragment>
         <Modal
           aria-labelledby="modal-title"
@@ -186,7 +152,7 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span>{selectedPost?.formattedRegistrationDate}</span>{' '}
+                    <span style={{ paddingBottom: '20px' }}>{selectedPost?.formattedRegistrationDate}</span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
@@ -263,6 +229,79 @@ const Community = () => {
 
 export default Community;
 
+const MainTitle = styled.h3`
+  color: white;
+  font-size: 32px;
+  text-align: center;
+`;
+const ListContainer = styled.div`
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+`;
+const ListBox = styled.div`
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+  background: center / cover no-repeat url(${ListBackgroundImg});
+  cursor: pointer;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: #886715;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(77, 59, 12, 0.2);
+  }
+`;
+const ListBoxContents = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+  text-align: center;
+`;
+
+const ListPhrasesBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+
+  padding: 20px 0;
+  & > p {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1.4;
+    color: #333;
+  }
+  & > p:nth-child(2) {
+    font-weight: 500;
+    font-size: 16px;
+    font-style: italic;
+
+    color: #000;
+  }
+  & > p:last-child {
+    font-size: 14px;
+    margin-bottom: 0px;
+    color: #666;
+  }
+`;
+
 const CardContainer = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -276,22 +315,21 @@ const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   width: 50%;
   height: 100%;
   margin: 0 auto;
 
   font-size: 18px;
-  text-align: center;
   color: #333;
 
   & > div > div {
-    margin: 0 auto;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
   }
 
   & > div > div:last-of-type {
-    padding-bottom: 0px;
+    padding-bottom: 20px;
   }
 
   & p {
@@ -314,7 +352,7 @@ const ContentsBox = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  margin: 20px auto 0;
+  margin: 0px auto 20px;
   width: 120px;
   height: 40px;
   font-size: 16px;
@@ -373,31 +411,3 @@ const StyleModalClose = styled(ModalClose)`
   position: absolute;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
 `;
-
-// const ListBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   box-sizing: border-box;
-//   height: 200px;
-//   max-height: 200px;
-//   padding: 5px 30px 10px;
-//   border-radius: 10px;
-//   background: center / cover no-repeat url(${ListBackgroundImg});
-//   cursor: pointer;
-
-//   & > p {
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     display: -webkit-box;
-//     -webkit-line-clamp: 6;
-//     -webkit-box-orient: vertical;
-
-//     font-size: 18px;
-//     font-weight: 400;
-//     letter-spacing: -0.5px;
-//     line-height: 1.4;
-
-//     color: #333;
-//   }
-// `;

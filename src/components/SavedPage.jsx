@@ -101,7 +101,7 @@ const ListBox = styled.div`
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
 
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: -0.5px;
     line-height: 1.4;

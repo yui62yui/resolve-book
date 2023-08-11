@@ -1,27 +1,33 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import HTMLFlipBook from 'react-pageflip';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import { useAtom, useAtomValue } from 'jotai';
-import { menuTitleAtom, postAtom, userAtom } from '../atoms/userAtom';
+import { postAtom, userAtom } from '../atoms/userAtom';
 import { Button, Input } from '@mui/material';
-import { FormGroup } from '@material-ui/core';
-import { kadvice } from 'kadvice';
+
 import axios from 'axios';
 import page1Img from '../assets/images/main_cover.png';
 import page2Img from '../assets/images/cover02.png';
 import page3Img from '../assets/images/cover01.png';
+import { kadvice } from 'kadvice';
+import { FormGroup } from '@material-ui/core';
+import { useNavigate } from 'react-router-dom';
 
 const Post = (props) => {
-  // Stat
+  // useRef를 사용하여 HTMLFlipBook
+  const navigate = useNavigate();
+  
   const [, setFlipEnabled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [userConcern, setUserConcern] = useAtom(postAtom);
+
   const [, setMenuTitle] = useAtom(menuTitleAtom);
   const [randomAdvice, setRandomAdvice] = useState(null);
   const [remainingCharacters, setRemainingCharacters] = useState(50); // 글자 수 50자 제한
   const [submittedConcern, setSubmittedConcern] = useState(userConcern);
+  
   const user = useAtomValue(userAtom);
   // useRef를 사용하여 HTMLFlipBook
   const flipBookRef = useRef(null);
@@ -219,20 +225,11 @@ const Post = (props) => {
       </BackgroundContainer>
     </>
   );
-
-  // 미로그인 시에는 바로 로그인 페이지로 이동
-  // 로그인 시에만 포스트 페이지 정상적으로 보이도록 함
 };
 
 export default Post;
 
-const BackgroundContainer = styled.div`
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: calc(100vh - 64px);
-`;
+const BackgroundContainer = styled.div``;
 
 const StyledContainer = styled.div`
   display: flex;
