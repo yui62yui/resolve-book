@@ -78,7 +78,9 @@ const Card = (data) => {
                 </span>
               </p>
             </div>
-            <span>{selectedPost?.registrationDate}</span>
+            <span style={{ paddingBottom: '20px', fontSize: '14px', color: '#555' }}>
+              {selectedPost?.registrationDate}
+            </span>
             <BottomContainer>
               <LikedButtonContainer>
                 <button

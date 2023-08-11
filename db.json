@@ -9,7 +9,7 @@
         "authorProfile": "영화 배우",
         "message": "실패를 하지 않는다면 너는 시도조차 하지 않는 것이다."
       },
-      "saved": false,
+      "saved": true,
       "liked": {
         "cheer": 0,
         "sad": 0,
