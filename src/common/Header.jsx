@@ -32,12 +32,6 @@ const Header = () => {
     }
   };
 
-  const [setMobileMoreAnchorEl] = React.useState(null);
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
   const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
