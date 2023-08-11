@@ -78,7 +78,7 @@ const Card = (data) => {
                 </span>
               </p>
             </div>
-            <span>2023.08.08</span>
+            <span>{selectedPost?.formattedRegistrationDate}</span>
             <BottomContainer>
               <LikedButtonContainer>
                 <button

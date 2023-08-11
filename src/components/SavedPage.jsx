@@ -10,11 +10,20 @@ const SavedPage = () => {
   const [data, setData] = useState([]);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const { data } = await axios.get('http://localhost:4000/test');
+  //     setData(data);
+  //   };
+  //   fetchPosts();
+  // }, [selectedPost]);
+
+  const fetchPosts = async () => {
+    const { data } = await axios.get('http://localhost:4000/test');
+    setData(data);
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      const { data } = await axios.get('http://localhost:4000/test');
-      setData(data);
-    };
     fetchPosts();
   }, [selectedPost]);
 
