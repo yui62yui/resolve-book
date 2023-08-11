@@ -238,12 +238,13 @@ const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  width: 100%;
+  width: 70%;
   height: 100%;
+  margin: 0 auto;
 `;
 const ListBox = styled.div`
   width: 100%;
-  height: 250px;
+  height: 200px;
   border-radius: 10px;
   background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
