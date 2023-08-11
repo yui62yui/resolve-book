@@ -86,7 +86,10 @@ const Post = (props) => {
           authorProfile: advice.authorProfile,
           message: advice.message
         },
-        saved: false,
+        userSaved: {
+          uid: user.uid,
+          saved: false
+        },
         liked: {
           cheer: 0,
           sad: 0,
