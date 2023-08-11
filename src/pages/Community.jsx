@@ -149,9 +149,7 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span style={{ paddingBottom: '20px', fontSize: '14px', color: '#555' }}>
-                      {selectedPost?.registrationDate}
-                    </span>{' '}
+                    <span style={{ paddingBottom: '20px', fontSize: '14px' }}>{selectedPost?.registrationDate}</span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
@@ -202,9 +200,9 @@ const Community = () => {
                     }}
                   >
                     {selectedPost?.saved ? (
-                      <BookmarkIcon sx={{ fontSize: '80px', color: '#a32626' }} />
+                      <BookmarkIcon sx={{ fontSize: '80px', color: '#46380e' }} />
                     ) : (
-                      <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#a32626' }} />
+                      <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#46380e' }} />
                     )}
                   </div>
                 ) : null}
@@ -324,7 +322,7 @@ const ContentsBox = styled.div`
   margin: 0 auto;
 
   font-size: 14px;
-  color: #333;
+  color: #4d4323;
 
   & > div > div {
     padding-bottom: 0px;
