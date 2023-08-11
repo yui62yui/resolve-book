@@ -85,7 +85,8 @@ const RightContainer = styled.div`
 const ListBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   height: 200px;
   max-height: 200px;
   padding: 5px 30px;

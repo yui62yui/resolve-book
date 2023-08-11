@@ -120,7 +120,7 @@ const ListBox = styled.div`
   box-sizing: border-box;
   height: 200px;
   max-height: 200px;
-  padding: 5px 30px 20px;
+  padding: 40px 30px 20px;
   border-radius: 10px;
   background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;

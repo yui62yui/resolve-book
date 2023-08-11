@@ -149,7 +149,9 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span style={{ paddingBottom: '20px' }}>{selectedPost?.registrationDate}</span>{' '}
+                    <span style={{ paddingBottom: '20px', fontSize: '14px', color: '#555' }}>
+                      {selectedPost?.registrationDate}
+                    </span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
