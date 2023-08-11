@@ -83,22 +83,35 @@ export default MyPage;
 
 const Container = styled.div`
   width: 80%;
-  min-width: 1000px;
   display: flex;
-  gap: 80px;
   margin: 0 auto;
 `;
 
 const LeftContainer = styled.div`
   width: 100%;
+  padding-right: 30px;
 `;
 
 const RightContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 320px));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+  column-gap: 20px;
+  justify-content: center;
+  row-gap: 30px;
   width: 100%;
-  height: 100%;
+  height: 600px;
+  overflow: auto;
+  padding-right: 30px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #eee;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #575757;
+  }
 `;
 
 const ListBoxContainer = styled.div`
@@ -118,6 +131,7 @@ const ListBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  width: 300px;
   height: 200px;
   max-height: 200px;
   padding: 40px 30px 20px;
