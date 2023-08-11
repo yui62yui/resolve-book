@@ -4,19 +4,15 @@ import styled from 'styled-components';
 import Card from '../common/Card';
 import ListBackgroundImg from '../assets/images/list-bg.png';
 import { useAtom } from 'jotai';
-import { selectedPostAtom } from '../atoms/userAtom';
+import { selectedPostAtom, userAtom } from '../atoms/userAtom';
 
 const SavedPage = () => {
   const [data, setData] = useState([]);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const { data } = await axios.get('http://localhost:4000/test');
-  //     setData(data);
-  //   };
-  //   fetchPosts();
-  // }, [selectedPost]);
+  const [user, setUser] = useAtom(userAtom);
+
+  const myUid = user?.uid;
 
   const fetchPosts = async () => {
     const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/test`);
@@ -42,7 +38,9 @@ const SavedPage = () => {
       </LeftContainer>
       <RightContainer>
         {data.map((post) => {
-          return post.saved ? (
+          const postUid = post?.userSaved?.uid;
+          const myUid = user?.uid;
+          return postUid === myUid && post?.userSaved?.saved ? (
             <ListBox
               key={post.id}
               onClick={() => {

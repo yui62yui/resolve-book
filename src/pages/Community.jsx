@@ -60,14 +60,17 @@ const Community = () => {
     try {
       const updatedPost = {
         ...post,
-        saved: !post.saved
+        userSaved: {
+          uid: user?.uid,
+          saved: !post.userSaved?.saved
+        }
       };
 
       await axios.put(`${process.env.REACT_APP_SERVER_URL}/test/${post.id}`, updatedPost);
 
       setSelectedPost(updatedPost);
 
-      post.saved
+      post?.userSaved.saved
         ? alert('북마크 설정이 해제되었습니다.')
         : alert('북마크가 설정되었습니다. 보관하신 글은 내 보관함 - 보관한 글 모아보기에서 확인 가능합니다.');
     } catch (error) {
@@ -199,7 +202,7 @@ const Community = () => {
                       changeSavedHandler(selectedPost);
                     }}
                   >
-                    {selectedPost?.saved ? (
+                    {selectedPost?.userSaved?.uid === user?.uid && selectedPost?.userSaved?.saved ? (
                       <BookmarkIcon sx={{ fontSize: '80px', color: '#46380e' }} />
                     ) : (
                       <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#46380e' }} />
