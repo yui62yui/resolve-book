@@ -9,11 +9,11 @@
         "authorProfile": "철학자",
         "message": "말할 수 없는 것에 대해서는 침묵해야 한다."
       },
-      "saved": false,
+      "saved": true,
       "liked": {
-        "cheer": 123123124,
-        "sad": 123123222,
-        "empathy": 223234344
+        "cheer": 123123123,
+        "sad": 123123223,
+        "empathy": 223234345
       }
     },
     {
@@ -25,9 +25,9 @@
         "authorProfile": "작가",
         "message": "사람들은 할 말이 없으면 욕을 한다."
       },
-      "saved": false,
+      "saved": true,
       "liked": {
-        "cheer": 1231,
+        "cheer": 1232,
         "sad": 12312,
         "empathy": 2234
       }
@@ -41,11 +41,11 @@
         "authorProfile": "철학자",
         "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
       },
-      "saved": false,
+      "saved": true,
       "liked": {
-        "cheer": 1231,
-        "sad": 12312,
-        "empathy": 2234
+        "cheer": 1232,
+        "sad": 12314,
+        "empathy": 2236
       }
     },
     {
@@ -75,41 +75,9 @@
       },
       "saved": false,
       "liked": {
-        "cheer": 0,
-        "sad": 0,
-        "empathy": 0
-      }
-    },
-    {
-      "uid": "BrPDX1pKD9Tg2OiKzFinTMzPmZ12",
-      "id": 7,
-      "userConcern": "고민내용3",
-      "matchedAdvice": {
-        "author": "프리드리히 니체",
-        "authorProfile": "철학자",
-        "message": "한낱 빛 따위가 어찌 어둠을 알 랴."
-      },
-      "saved": true,
-      "liked": {
         "cheer": 1,
         "sad": 1,
         "empathy": 1
-      }
-    },
-    {
-      "uid": "JmYpPzMcB5OIyvsaojWy2ctAzVv1",
-      "id": 8,
-      "userConcern": "hhhhhhh",
-      "matchedAdvice": {
-        "author": "일론 머스크",
-        "authorProfile": "스페이스X 창업자, 테슬라 CEO",
-        "message": "정말 중요한 일이라면 역경이 닥쳐도 그 일을 계속해야 합니다."
-      },
-      "saved": false,
-      "liked": {
-        "cheer": 0,
-        "sad": 0,
-        "empathy": 0
       }
     }
   ]

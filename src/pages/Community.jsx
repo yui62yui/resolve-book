@@ -22,8 +22,28 @@ const Community = () => {
   const [posts, setPosts] = useState();
 
   const fetchPosts = async () => {
-    const { data } = await axios.get('http://localhost:4000/test');
-    setPosts(data);
+    try {
+      const { data } = await axios.get('http://localhost:4000/test');
+
+      const transformedPosts = data.map((post) => {
+        const formattedDate = new Date(post.registrationDate)
+          .toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          })
+          .replace(/\./g, ' '); // "."을 " "로 치환하여 형식에 맞게 변환
+
+        return {
+          ...post,
+          formattedRegistrationDate: formattedDate
+        };
+      });
+
+      setPosts(transformedPosts);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
   };
 
   const onDeleteButtonClickHandler = async (postId) => {
@@ -166,7 +186,7 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span>2023.08.08</span>{' '}
+                    <span>{selectedPost?.formattedRegistrationDate}</span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
