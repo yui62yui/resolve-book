@@ -101,14 +101,11 @@ const Community = () => {
               >
                 <ListPhrasesBox>
                   <p>{post.userConcern}</p>
-                  <p>{post.matchedAdvice.message}</p>
-                  <p>
-                    {post.matchedAdvice.author} -{post.matchedAdvice.authorProfile}
-                  </p>
+                  <p>자세히 보려면 클릭하세요</p>
                 </ListPhrasesBox>
                 <div>
                   {post?.uid === user?.uid ? (
-                    <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제하기</DeleteButton>
+                    <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제</DeleteButton>
                   ) : (
                     ''
                   )}
@@ -152,7 +149,7 @@ const Community = () => {
                         </span>
                       </p>
                     </div>
-                    <span style={{ paddingBottom: '20px' }}>{selectedPost?.formattedRegistrationDate}</span>{' '}
+                    <span style={{ paddingBottom: '20px' }}>{selectedPost?.registrationDate}</span>{' '}
                     <BottomContainer>
                       <LikedButtonContainer>
                         <button
@@ -183,7 +180,7 @@ const Community = () => {
                     </BottomContainer>
                     {/* {selectedPost.uid === user ? <button>삭제하기</button> : ''} */}
                     {selectedPost?.uid === user?.uid ? (
-                      <DeleteButton onClick={() => onDeleteButtonClickHandler(selectedPost.id)}>삭제하기</DeleteButton>
+                      <DeleteButton onClick={() => onDeleteButtonClickHandler(selectedPost.id)}>삭제</DeleteButton>
                     ) : (
                       ''
                     )}
@@ -203,9 +200,9 @@ const Community = () => {
                     }}
                   >
                     {selectedPost?.saved ? (
-                      <BookmarkIcon sx={{ fontSize: '150px', color: '#218942' }} />
+                      <BookmarkIcon sx={{ fontSize: '80px', color: '#a32626' }} />
                     ) : (
-                      <BookmarkBorderOutlinedIcon sx={{ fontSize: '150px', color: '#218942' }} />
+                      <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#a32626' }} />
                     )}
                   </div>
                 ) : null}
@@ -231,8 +228,10 @@ export default Community;
 
 const MainTitle = styled.h3`
   color: white;
-  font-size: 32px;
+  font-size: 26px;
   text-align: center;
+
+  margin: 0px 0px 32px;
 `;
 const ListContainer = styled.div`
   box-sizing: border-box;
@@ -281,7 +280,7 @@ const ListPhrasesBox = styled.div`
   padding: 20px 0;
   & > p {
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: -0.5px;
@@ -305,8 +304,8 @@ const ListPhrasesBox = styled.div`
 const CardContainer = styled.div`
   position: relative;
   box-sizing: border-box;
-  width: 650px;
-  height: 950px;
+  width: 400px;
+  height: 600px;
   margin: 0 auto;
   border-radius: 10px;
   background: center / cover no-repeat url(${CardBackgroundImg});
@@ -321,7 +320,7 @@ const ContentsBox = styled.div`
   height: 100%;
   margin: 0 auto;
 
-  font-size: 18px;
+  font-size: 14px;
   color: #333;
 
   & > div > div {
@@ -345,7 +344,7 @@ const ContentsBox = styled.div`
   }
 
   & div > span {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     font-style: italic;
   }
@@ -353,15 +352,15 @@ const ContentsBox = styled.div`
 
 const DeleteButton = styled.button`
   margin: 0px auto 20px;
-  width: 120px;
-  height: 40px;
-  font-size: 16px;
-  font-weight: 400;
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
   border-radius: 20px;
-  border: 3px solid #9e9e9e;
-  color: #333;
+  border: 2px solid #9e9e9e;
+  color: #666;
   background-color: #fff;
-  box-shadow: 2px 2px 2px #686868;
+  box-shadow: 1px 1px 1px #686868;
   transition: 0.3s;
   cursor: pointer;
 
@@ -372,21 +371,19 @@ const DeleteButton = styled.button`
 
 const BookMarkContainer = styled.div`
   position: absolute;
-  top: 30px;
-  left: 10px;
+  top: -17px;
+  left: 5px;
   cursor: pointer;
 `;
-
 const BottomContainer = styled.div`
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 23px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 650px;
-  height: 60px;
-  background-color: #666;
+  width: 400px;
+  height: 30px;
 `;
 
 const LikedButtonContainer = styled.div`
@@ -395,7 +392,7 @@ const LikedButtonContainer = styled.div`
   & > button {
     padding: 5px 15px;
     border-radius: 15px;
-    font-size: 16px;
+    font-size: 13px;
     transition: 0.3s;
     cursor: pointer;
 
@@ -406,8 +403,8 @@ const LikedButtonContainer = styled.div`
 `;
 
 const StyleModalClose = styled(ModalClose)`
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   position: absolute;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
 `;

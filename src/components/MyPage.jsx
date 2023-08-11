@@ -61,20 +61,13 @@ const MyPage = () => {
                 >
                   <p>{post?.userConcern}</p>
                 </ListBox>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: '#868686',
-                    transition: '0.3s',
-                    ':hover': { backgroundColor: '#666' }
-                  }}
+                <DeleteButton
                   onClick={() => {
                     deletePostHandler(post.id);
                   }}
                 >
-                  <DeleteIcon sx={{ fontSize: '18px', marginRight: '5px' }} />
                   <span>삭제</span>
-                </Button>
+                </DeleteButton>
               </ListBoxContainer>
             );
           } else {
@@ -117,8 +110,6 @@ const ListBoxContainer = styled.div`
     left: 0px;
     right: 0px;
     margin: 0 auto;
-    width: 100px;
-    height: 40px;
   }
 `;
 
@@ -147,5 +138,23 @@ const ListBox = styled.div`
     line-height: 1.4;
 
     color: #333;
+  }
+`;
+const DeleteButton = styled.button`
+  margin: 0px auto 20px;
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  border: 2px solid #9e9e9e;
+  color: #666;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px #686868;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #9e9e9e;
   }
 `;

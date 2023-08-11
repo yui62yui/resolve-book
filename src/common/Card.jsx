@@ -78,7 +78,7 @@ const Card = (data) => {
                 </span>
               </p>
             </div>
-            <span>{selectedPost?.formattedRegistrationDate}</span>
+            <span>{selectedPost?.registrationDate}</span>
             <BottomContainer>
               <LikedButtonContainer>
                 <button
@@ -122,9 +122,9 @@ const Card = (data) => {
             }}
           >
             {selectedPost?.saved ? (
-              <BookmarkIcon sx={{ fontSize: '150px', color: '#218942' }} />
+              <BookmarkIcon sx={{ fontSize: '80px', color: '#a32626' }} />
             ) : (
-              <BookmarkBorderOutlinedIcon sx={{ fontSize: '150px', color: '#218942' }} />
+              <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#a32626' }} />
             )}
           </div>
         ) : null}
@@ -138,9 +138,9 @@ export default Card;
 const CardContainer = styled.div`
   position: relative;
   box-sizing: border-box;
-  width: 650px;
-  height: 950px;
-  margin: 0 auto;
+  width: 400px;
+  height: 600px;
+  margin: 0 0 0 auto;
   border-radius: 10px;
   background: center / cover no-repeat url(${CardBackgroundImg});
 `;
@@ -154,7 +154,7 @@ const ContentsBox = styled.div`
   height: 100%;
   margin: 0 auto;
 
-  font-size: 18px;
+  font-size: 14px;
   color: #333;
 
   & > div > div {
@@ -178,7 +178,7 @@ const ContentsBox = styled.div`
   }
 
   & div > span {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     font-style: italic;
   }
@@ -186,21 +186,20 @@ const ContentsBox = styled.div`
 
 const BookMarkContainer = styled.div`
   position: absolute;
-  top: 30px;
-  left: 10px;
+  top: -17px;
+  left: 5px;
   cursor: pointer;
 `;
 
 const BottomContainer = styled.div`
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 33px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 650px;
-  height: 60px;
-  background-color: #666;
+  width: 400px;
+  height: 30px;
 `;
 
 const LikedButtonContainer = styled.div`
@@ -209,7 +208,7 @@ const LikedButtonContainer = styled.div`
   & > button {
     padding: 5px 15px;
     border-radius: 15px;
-    font-size: 16px;
+    font-size: 13px;
     transition: 0.3s;
     cursor: pointer;
 

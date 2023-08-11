@@ -95,7 +95,7 @@ const Login = () => {
         책을 펼쳐보고 싶으신가요?<br></br>우선 로그인이 필요합니다
       </MainTitle>
       <Container
-        style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '1px' }}
+        style={{ backgroundColor: 'white', width: '450px', height: '600px', paddingTop: '1px', borderRadius: '20px' }}
         component="main"
         maxWidth="xs"
       >

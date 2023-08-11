@@ -86,21 +86,15 @@ const ListBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
   height: 200px;
   max-height: 200px;
-  padding: 5px 30px 10px;
+  padding: 5px 30px;
   border-radius: 10px;
   background: center / cover no-repeat url(${ListBackgroundImg});
   cursor: pointer;
 
   & > p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-
+    box-sizing: border-box;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: -0.5px;
