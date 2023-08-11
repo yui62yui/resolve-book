@@ -6,7 +6,30 @@
 *고민을 작성하면 조언을 명언으로 제공 받을 수 있는 사이트 입니다. <br>커뮤니티 페이지에서는 본인의 고민 뿐만 아니라, 타인의 고민과 그에 대한 해결책(조언)을 보고 공감할 수 있습니다. 또한 마이페이지에서 자신의 고민을 모아볼 수 있으며, 타인의 고민글 중 마음에 드는 글을 보관하여 추후에 다시 볼 수 있습니다. ‘고민 사이트’의 취지에 맞게 모든 글은 익명으로 보관, 관리됩니다.*
 <br>
 <br>
-(미리보기 영상 업로드 예정)
+## 🫣 미리보기
+로그인
+<img width="1450" alt="로그인" src="https://github.com/yui62yui/resolve-book/assets/123552221/f0c90bf3-63ae-4b87-bfe6-2ee193b9c46e">
+
+회원가입
+<img width="1450" alt="회원가입" src="https://github.com/yui62yui/resolve-book/assets/123552221/9e783710-52ba-4507-9dd1-83fdaddb49f7">
+
+메인페이지
+<img width="1450" alt="고민입력" src="https://github.com/yui62yui/resolve-book/assets/123552221/161a4eb8-8016-46e2-af9f-e26a4e9b5602">
+
+조언 보기
+<img width="1450" alt="고민-조언" src="https://github.com/yui62yui/resolve-book/assets/123552221/d0bab8ff-5a2b-47f4-9395-1966d338e7c6">
+
+내 보관함 - 나의 글 모아보기
+<img width="1450" alt="나의글1" src="https://github.com/yui62yui/resolve-book/assets/123552221/2f700ce9-12e9-4e01-8f47-9df61963776f">
+
+내 보관함 - 보관된 글 
+<img width="1450" alt="보관된글" src="https://github.com/yui62yui/resolve-book/assets/123552221/bd0060f2-7086-43ab-a914-28bd39e9213a">
+
+커뮤니티
+<img width="1450" alt="커뮤니티" src="https://github.com/yui62yui/resolve-book/assets/123552221/b85b360e-cd3e-4ffb-a096-db310e7e95e1">
+
+커뮤니티 상세
+<img width="1450" alt="커뮤니티상세" src="https://github.com/yui62yui/resolve-book/assets/123552221/0b5cd34d-44f2-41dd-9f46-ad3a4f103f6e">
 <br>
 <br>
 
