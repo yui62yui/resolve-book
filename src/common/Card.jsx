@@ -78,9 +78,7 @@ const Card = (data) => {
                 </span>
               </p>
             </div>
-            <span style={{ paddingBottom: '20px', fontSize: '14px', color: '#555' }}>
-              {selectedPost?.registrationDate}
-            </span>
+            <span style={{ paddingBottom: '20px', fontSize: '14px' }}>{selectedPost?.registrationDate}</span>
             <BottomContainer>
               <LikedButtonContainer>
                 <button
@@ -157,7 +155,7 @@ const ContentsBox = styled.div`
   margin: 0 auto;
 
   font-size: 14px;
-  color: #333;
+  color: #4d4323;
 
   & > div > div {
     padding-bottom: 10px;
