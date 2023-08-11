@@ -19,9 +19,14 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Firebase에서 로그아웃 처리
-      setUser(null); // Jotai의 userAtom을 null로 업데이트하여 로그아웃 상태로 변경
-      alert('로그아웃 되었습니다.');
+      // 로그아웃 시 사용자에게 확인 메시지 표시
+      const userConfirmed = window.confirm('로그아웃 하시겠습니까?');
+
+      if (userConfirmed) {
+        await signOut(auth); // Firebase에서 로그아웃 처리
+        setUser(null); // Jotai의 userAtom을 null로 업데이트하여 로그아웃 상태로 변경
+        alert('로그아웃 되었습니다.');
+      }
     } catch (error) {
       console.error('로그아웃 중 오류 발생:', error);
     }
@@ -101,7 +106,6 @@ const Header = () => {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
               color="inherit"
             >
               <MoreIcon />
