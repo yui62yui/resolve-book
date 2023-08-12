@@ -23,10 +23,8 @@ const Post = (props) => {
   const [remainingCharacters, setRemainingCharacters] = useState(50); // 글자 수 50자 제한
   const [submittedConcern, setSubmittedConcern] = useState(userConcern);
   const user = useAtomValue(userAtom);
-
   // useRef를 사용하여 HTMLFlipBook
   const flipBookRef = useRef(null);
-
   // 글자 수가 50자를 초과하고 Enter 키가 눌렸을 때 경고창 띄우기
   const handleKeyPress = (e) => {
     if (userConcern.trim().length > 50 && e.key === 'Enter') {
