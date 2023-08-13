@@ -5,15 +5,26 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useAtom, useAtomValue } from 'jotai';
 import axios from 'axios';
-import { selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { bookmarkedPostAtom, selectedPostAtom, userAtom } from '../atoms/userAtom';
+import { nanoid } from 'nanoid';
 
-const Card = (data) => {
+const Card = () => {
   const user = useAtomValue(userAtom);
   const [selectedPost, setSelectedPost] = useAtom(selectedPostAtom);
+  const [bookmarkedPost, setBookmarkedPost] = useAtom(bookmarkedPostAtom);
+
+  const bookmarkedPostHandler = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bp`);
+    setBookmarkedPost(data);
+  };
 
   useEffect(() => {
     setSelectedPost(null);
   }, []);
+
+  useEffect(() => {
+    bookmarkedPostHandler();
+  }, [selectedPost]);
 
   const likedCounter = async (post, emotion) => {
     try {
@@ -35,27 +46,27 @@ const Card = (data) => {
     }
   };
 
-  const changeSavedHandler = async (post) => {
+  const savePostHandler = async (post) => {
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/bp`, {
+      id: nanoid(),
+      uid: user.uid,
+      postId: post.id,
+      userConcern: post.userConcern
+    });
+    alert('북마크 설정 완료');
+    bookmarkedPostHandler();
+  };
+
+  const deletePostHandler = async (selectedPost) => {
+    alert('정말 삭제하시겠습니까?');
     try {
-      const updatedPost = {
-        ...post,
-        userSaved: {
-          uid: user?.uid,
-          saved: !post.userSaved?.saved
-        }
-      };
-
-      await axios.put(`${process.env.REACT_APP_SERVER_URL}/test/${post.id}`, updatedPost);
-
-      setSelectedPost(updatedPost);
-
-      post?.userSaved.saved
-        ? alert('북마크 설정이 해제되었습니다.')
-        : alert('북마크가 설정되었습니다. 보관하신 글은 내 보관함 - 보관한 글 모아보기에서 확인 가능합니다.');
-
+      const wantedPost = await bookmarkedPost.find((bp) => user.uid === bp.uid && selectedPost.id === bp.postId);
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/bp/${wantedPost.id}`);
+      alert('북마크 해제 완료');
       setSelectedPost(null);
+      bookmarkedPostHandler();
     } catch (error) {
-      alert('에러로 인해 동작을 수행하지 못했어요 :( 다시 시도해 주세요!');
+      alert('에러발생');
     }
   };
 
@@ -119,15 +130,21 @@ const Card = (data) => {
       </ContentsBox>
       <BookMarkContainer>
         {!!selectedPost?.uid === true && selectedPost?.uid !== user.uid ? (
-          <div
-            onClick={() => {
-              changeSavedHandler(selectedPost);
-            }}
-          >
-            {selectedPost?.userSaved?.uid === user?.uid && selectedPost?.userSaved?.saved ? (
-              <BookmarkIcon sx={{ fontSize: '80px', color: '#46380e' }} />
+          <div>
+            {bookmarkedPost?.find((bp) => bp?.uid === user.uid && bp?.postId === selectedPost?.id) ? (
+              <BookmarkIcon
+                onClick={() => {
+                  deletePostHandler(selectedPost);
+                }}
+                sx={{ fontSize: '80px', color: '#46380e' }}
+              />
             ) : (
-              <BookmarkBorderOutlinedIcon sx={{ fontSize: '80px', color: '#46380e' }} />
+              <BookmarkBorderOutlinedIcon
+                onClick={() => {
+                  savePostHandler(selectedPost);
+                }}
+                sx={{ fontSize: '80px', color: '#46380e' }}
+              />
             )}
           </div>
         ) : null}
