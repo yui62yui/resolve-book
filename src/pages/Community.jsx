@@ -116,14 +116,21 @@ const Community = () => {
                   <p>{post.userConcern}</p>
                   <p>자세히 보려면 클릭하세요</p>
                 </ListPhrasesBox>
-                <div>
+                {/* <div>
                   {post?.uid === user?.uid ? (
                     <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제</DeleteButton>
                   ) : (
                     ''
                   )}
-                </div>
+                </div> */}
               </ListBoxContents>
+              <div>
+                {post?.uid === user?.uid ? (
+                  <DeleteButton onClick={() => onDeleteButtonClickHandler(post.id)}>삭제</DeleteButton>
+                ) : (
+                  ''
+                )}
+              </div>
             </ListBox>
           );
         })}
@@ -285,7 +292,7 @@ const ListBoxContents = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 80%;
-  height: 100%;
+  height: 83%;
   margin: 0px auto;
   text-align: center;
 `;
@@ -295,8 +302,8 @@ const ListPhrasesBox = styled.div`
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
+  white-space: normal;
 
-  padding: 20px 0;
   & > p {
     margin-top: 0px;
     margin-bottom: 30px;
@@ -370,9 +377,9 @@ const ContentsBox = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  margin: 0px auto 20px;
-  width: 80px;
-  height: 30px;
+  margin-left: 110px;
+  width: 70px;
+  height: 28px;
   font-size: 12px;
   font-weight: 600;
   border-radius: 20px;
