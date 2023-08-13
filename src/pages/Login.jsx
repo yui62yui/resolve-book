@@ -59,7 +59,6 @@ const Login = () => {
         return;
       }
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredential);
       alert('로그인에 성공하셨습니다.');
 
       navigate('/');
