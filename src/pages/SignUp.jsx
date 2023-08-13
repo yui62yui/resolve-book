@@ -69,7 +69,7 @@ const SignUp = () => {
     }
   };
 
-  // 에러 코드에 따른 유효성 검사 한 번에 관리
+  // 에러 코드에 따른 유효성 검사 한 번에 관리를 함
   const getErrorMessage = (errorCode) => {
     switch (errorCode) {
       case 'auth/user-not-found':
