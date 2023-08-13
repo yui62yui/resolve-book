@@ -377,7 +377,8 @@ const ContentsBox = styled.div`
 `;
 
 const DeleteButton = styled.button`
-  margin-left: 110px;
+  margin: auto;
+  display: block;
   width: 70px;
   height: 28px;
   font-size: 12px;
